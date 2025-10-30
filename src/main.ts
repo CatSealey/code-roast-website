@@ -2,6 +2,26 @@ import { DarkModeManager } from './components/DarkModeManager.js';
 import { UIManager } from './components/UIManager.js';
 import { ConfigManager } from './services/ConfigManager.js';
 import { DataService } from './services/DataService.js';
+import { 
+  ConfigValues, 
+  ConfigKey, 
+  AppStatus, 
+  ElementSDKConfig,
+  DataEventType,
+  DataEventData,
+  UIEventType,
+  UIEventData
+} from './types.js';
+
+// Extend global Window interface for external SDK
+declare global {
+  interface Window {
+    elementSdk?: {
+      init: (config: ElementSDKConfig) => void;
+    };
+    codeRoastApp?: CodeRoastApp;
+  }
+}
 
 /**
  * Main Application Class
@@ -9,6 +29,14 @@ import { DataService } from './services/DataService.js';
  * Acts as the composition root for the application
  */
 export class CodeRoastApp {
+  private readonly configManager: ConfigManager;
+  private readonly dataService: DataService;
+  private readonly uiManager: UIManager;
+  private readonly darkModeManager: DarkModeManager;
+  
+  private isInitialized: boolean = false;
+  private readonly version: string = '1.0.0';
+
   constructor() {
     // Initialize services
     this.configManager = new ConfigManager();
@@ -16,17 +44,13 @@ export class CodeRoastApp {
     this.uiManager = new UIManager();
     this.darkModeManager = new DarkModeManager();
     
-    // Application state
-    this.isInitialized = false;
-    this.version = '1.0.0';
-    
     this.init();
   }
 
   /**
    * Initialize the application
    */
-  async init() {
+  async init(): Promise<void> {
     try {
       console.log('Initializing Code-Roast Application...');
       
@@ -59,8 +83,8 @@ export class CodeRoastApp {
   /**
    * Setup configuration change observers
    */
-  setupConfigObservers() {
-    this.configManager.addObserver((changes) => {
+  private setupConfigObservers(): void {
+    this.configManager.addObserver((changes: Partial<ConfigValues>) => {
       this.handleConfigChange(changes);
     });
   }
@@ -68,8 +92,8 @@ export class CodeRoastApp {
   /**
    * Setup data service observers
    */
-  setupDataObservers() {
-    this.dataService.addObserver((eventType, data) => {
+  private setupDataObservers(): void {
+    this.dataService.addObserver((eventType: DataEventType, data: DataEventData) => {
       this.handleDataEvent(eventType, data);
     });
   }
@@ -77,35 +101,33 @@ export class CodeRoastApp {
   /**
    * Setup UI observers
    */
-  setupUIObservers() {
-    this.uiManager.addObserver('buttonClick', (data) => {
+  private setupUIObservers(): void {
+    this.uiManager.addObserver('buttonClick', (_eventType: UIEventType, data: UIEventData) => {
       this.handleButtonClick(data);
     });
   }
 
   /**
    * Handle configuration changes
-   * @param {Object} changes - Configuration changes
    */
-  handleConfigChange(changes) {
+  private handleConfigChange(changes: Partial<ConfigValues>): void {
     console.log('Configuration changed:', changes);
     
     // Update UI elements
     Object.entries(changes).forEach(([key, value]) => {
-      if (this.isTextContent(key)) {
-        this.uiManager.updateElement(this.getElementId(key), value);
-      } else if (this.isStyleProperty(key)) {
-        this.updateStyles(key, value);
+      const configKey = key as ConfigKey;
+      if (this.isTextContent(configKey) && typeof value === 'string') {
+        this.uiManager.updateElement(this.getElementId(configKey), value);
+      } else if (this.isStyleProperty(configKey)) {
+        this.updateStyles(configKey, value);
       }
     });
   }
 
   /**
    * Handle data service events
-   * @param {string} eventType - Type of event
-   * @param {Object} data - Event data
    */
-  handleDataEvent(eventType, data) {
+  private handleDataEvent(eventType: DataEventType, data: DataEventData): void {
     console.log(`Data event: ${eventType}`, data);
     
     switch (eventType) {
@@ -123,31 +145,28 @@ export class CodeRoastApp {
 
   /**
    * Handle successful data fetch
-   * @param {Object} data - Fetched data
    */
-  handleDataFetched(data) {
+  private handleDataFetched(data: DataEventData): void {
     // Update UI with new data
-    if (data.endpoint.includes('analytics')) {
+    if (data.endpoint?.includes('analytics')) {
       this.updateAnalyticsDisplay(data.data);
-    } else if (data.endpoint.includes('config')) {
-      this.configManager.setConfig(data.data);
+    } else if (data.endpoint?.includes('config')) {
+      this.configManager.setConfig(data.data as Partial<ConfigValues>);
     }
   }
 
   /**
    * Handle data fetch errors
-   * @param {Object} error - Error data
    */
-  handleDataError(error) {
+  private handleDataError(error: DataEventData): void {
     console.error('Data service error:', error);
     // Could show error toast or fallback UI
   }
 
   /**
    * Handle button clicks
-   * @param {Object} data - Click data
    */
-  handleButtonClick(data) {
+  private handleButtonClick(data: UIEventData): void {
     console.log('Button clicked:', data);
     // Handle different button actions
   }
@@ -155,11 +174,11 @@ export class CodeRoastApp {
   /**
    * Initialize external SDK
    */
-  initializeSDK() {
+  private initializeSDK(): void {
     if (window.elementSdk) {
       window.elementSdk.init({
         defaultConfig: this.configManager.getAll(),
-        onConfigChange: (config) => this.configManager.setConfig(config),
+        onConfigChange: (config: Partial<ConfigValues>) => this.configManager.setConfig(config),
         mapToCapabilities: () => this.configManager.getCapabilities(),
         mapToEditPanelValues: () => this.configManager.getEditPanelValues()
       });
@@ -170,7 +189,7 @@ export class CodeRoastApp {
   /**
    * Load initial data
    */
-  async loadInitialData() {
+  private async loadInitialData(): Promise<void> {
     try {
       // Try to load configuration from server
       // Fall back to default if not available
@@ -186,18 +205,16 @@ export class CodeRoastApp {
   /**
    * Apply initial configuration
    */
-  applyInitialConfig() {
+  private applyInitialConfig(): void {
     const config = this.configManager.getAll();
     this.handleConfigChange(config);
   }
 
   /**
    * Check if key represents text content
-   * @param {string} key - Configuration key
-   * @returns {boolean} True if text content
    */
-  isTextContent(key) {
-    const textKeys = [
+  private isTextContent(key: ConfigKey): boolean {
+    const textKeys: ConfigKey[] = [
       'company_name', 'hero_title', 'hero_subtitle', 'cta_button',
       'section_one_title', 'section_two_title', 'section_three_title',
       'footer_text'
@@ -207,11 +224,9 @@ export class CodeRoastApp {
 
   /**
    * Check if key represents style property
-   * @param {string} key - Configuration key
-   * @returns {boolean} True if style property
    */
-  isStyleProperty(key) {
-    const styleKeys = [
+  private isStyleProperty(key: ConfigKey): boolean {
+    const styleKeys: ConfigKey[] = [
       'background_color', 'surface_color', 'text_color',
       'primary_action_color', 'secondary_action_color',
       'font_family', 'font_size'
@@ -221,11 +236,9 @@ export class CodeRoastApp {
 
   /**
    * Get element ID for configuration key
-   * @param {string} key - Configuration key
-   * @returns {string} Element ID
    */
-  getElementId(key) {
-    const mapping = {
+  private getElementId(key: ConfigKey): string {
+    const mapping: Partial<Record<ConfigKey, string>> = {
       'company_name': 'company-name',
       'hero_title': 'hero-title',
       'hero_subtitle': 'hero-subtitle',
@@ -240,52 +253,48 @@ export class CodeRoastApp {
 
   /**
    * Update styles based on configuration
-   * @param {string} key - Style key
-   * @param {any} value - Style value
    */
-  updateStyles(key, value) {
+  private updateStyles(key: ConfigKey, value: unknown): void {
     const root = document.documentElement;
     const body = document.body;
     
     switch (key) {
       case 'background_color':
-        root.style.setProperty('--color-primary', value);
+        root.style.setProperty('--color-primary', String(value));
         break;
       case 'surface_color':
-        root.style.setProperty('--color-surface', value);
+        root.style.setProperty('--color-surface', String(value));
         break;
       case 'text_color':
-        root.style.setProperty('--color-text', value);
+        root.style.setProperty('--color-text', String(value));
         break;
       case 'primary_action_color':
-        root.style.setProperty('--color-secondary', value);
+        root.style.setProperty('--color-secondary', String(value));
         break;
       case 'secondary_action_color':
-        root.style.setProperty('--color-accent', value);
+        root.style.setProperty('--color-accent', String(value));
         break;
       case 'font_family':
-        body.style.fontFamily = `${value}, var(--font-family-base)`;
+        body.style.fontFamily = `${String(value)}, var(--font-family-base)`;
         break;
       case 'font_size':
-        root.style.setProperty('--font-size-base', `${value}px`);
+        root.style.setProperty('--font-size-base', `${Number(value)}px`);
         break;
     }
   }
 
   /**
    * Update analytics display
-   * @param {Object} analyticsData - Analytics data to display
    */
-  updateAnalyticsDisplay(analyticsData) {
+  private updateAnalyticsDisplay(analyticsData: unknown): void {
     // This would update charts and analytics displays
     console.log('Updating analytics display:', analyticsData);
   }
 
   /**
    * Get application status
-   * @returns {Object} Application status
    */
-  getStatus() {
+  getStatus(): AppStatus {
     return {
       initialized: this.isInitialized,
       version: this.version,
@@ -297,13 +306,8 @@ export class CodeRoastApp {
   /**
    * Destroy application and clean up
    */
-  destroy() {
+  destroy(): void {
     console.log('Destroying Code-Roast Application...');
-    
-    // Clean up observers and event listeners
-    this.configManager.observers.length = 0;
-    this.dataService.observers.clear();
-    this.uiManager.observers.clear();
     
     // Clear caches
     this.dataService.clearCache();

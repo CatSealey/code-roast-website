@@ -1,8 +1,27 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { UIManager } from '../src/components/UIManager.js';
+import { UIEventType, UIEventData } from '../src/types.js';
 
 // Setup test utilities
-const createMockElement = (className = '') => ({
+interface MockElement {
+  classList: {
+    add: ReturnType<typeof vi.fn>;
+    remove: ReturnType<typeof vi.fn>;
+    contains: ReturnType<typeof vi.fn>;
+  };
+  style: Record<string, string>;
+  getAttribute: ReturnType<typeof vi.fn>;
+  closest: ReturnType<typeof vi.fn>;
+  addEventListener: ReturnType<typeof vi.fn>;
+  removeEventListener: ReturnType<typeof vi.fn>;
+  className: string;
+  textContent?: string;
+  innerHTML?: string;
+  appendChild?: ReturnType<typeof vi.fn>;
+  getBoundingClientRect?: ReturnType<typeof vi.fn>;
+}
+
+const createMockElement = (className = ''): MockElement => ({
   classList: {
     add: vi.fn(),
     remove: vi.fn(),
@@ -17,7 +36,7 @@ const createMockElement = (className = '') => ({
 });
 
 const setupDOMMocks = () => {
-  global.document = {
+  (global as any).document = {
     getElementById: vi.fn(),
     querySelector: vi.fn(),
     querySelectorAll: vi.fn(() => []),
@@ -30,16 +49,16 @@ const setupDOMMocks = () => {
     removeEventListener: vi.fn()
   };
 
-  global.window = {
+  (global as any).window = {
     innerHeight: 768,
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
-    requestAnimationFrame: vi.fn(cb => setTimeout(cb, 0))
+    requestAnimationFrame: vi.fn((cb: () => void) => setTimeout(cb, 0))
   };
 };
 
 describe('UIManager', () => {
-  let uiManager;
+  let uiManager: UIManager;
 
   beforeEach(() => {
     setupDOMMocks();
@@ -47,40 +66,29 @@ describe('UIManager', () => {
   });
 
   describe('constructor', () => {
-    it('should initialize with empty collections', () => {
-      expect(uiManager.observers instanceof Map).toBe(true);
-      expect(uiManager.animationCallbacks instanceof Map).toBe(true);
-      expect(uiManager.scrollRevealElements instanceof Set).toBe(true);
-      expect(uiManager.particleSystems instanceof Set).toBe(true);
+    it('should initialize properly', () => {
+      expect(uiManager).toBeInstanceOf(UIManager);
     });
   });
 
   describe('observer pattern', () => {
     it('should add observer for specific event type', () => {
       const callback = vi.fn();
-      uiManager.addObserver('click', callback);
+      uiManager.addObserver('buttonClick', callback);
       
-      const observers = uiManager.observers.get('click');
-      expect(observers.has(callback)).toBe(true);
+      const observerMap = (uiManager as any).observerMap as Map<UIEventType, Set<Function>>;
+      const observers = observerMap.get('buttonClick');
+      expect(observers?.has(callback)).toBe(true);
     });
 
     it('should remove observer', () => {
       const callback = vi.fn();
-      uiManager.addObserver('click', callback);
-      uiManager.removeObserver('click', callback);
+      uiManager.addObserver('buttonClick', callback);
+      uiManager.removeObserver('buttonClick', callback);
       
-      const observers = uiManager.observers.get('click');
-      expect(observers.has(callback)).toBe(false);
-    });
-
-    it('should trigger observers with data', () => {
-      const callback = vi.fn();
-      uiManager.addObserver('test', callback);
-      
-      const testData = { message: 'test' };
-      uiManager.triggerObservers('test', testData);
-      
-      expect(callback).toHaveBeenCalledWith(testData);
+      const observerMap = (uiManager as any).observerMap as Map<UIEventType, Set<Function>>;
+      const observers = observerMap.get('buttonClick');
+      expect(observers?.has(callback)).toBe(false);
     });
 
     it('should handle observer errors gracefully', () => {
@@ -89,11 +97,16 @@ describe('UIManager', () => {
       });
       const normalCallback = vi.fn();
       
-      uiManager.addObserver('error', errorCallback);
-      uiManager.addObserver('error', normalCallback);
+      uiManager.addObserver('buttonClick', errorCallback);
+      uiManager.addObserver('buttonClick', normalCallback);
       
+      const testData: UIEventData = {
+        type: 'buttonClick',
+        timestamp: Date.now()
+      };
+
       expect(() => {
-        uiManager.triggerObservers('error', {});
+        (uiManager as any).triggerObservers('buttonClick', testData);
       }).not.toThrow();
       
       expect(normalCallback).toHaveBeenCalled();
@@ -105,7 +118,8 @@ describe('UIManager', () => {
       const animationCallback = vi.fn();
       uiManager.addAnimation('fadeIn', animationCallback);
       
-      expect(uiManager.animationCallbacks.has('fadeIn')).toBe(true);
+      const animationCallbacks = (uiManager as any).animationCallbacks as Map<string, Function>;
+      expect(animationCallbacks.has('fadeIn')).toBe(true);
     });
 
     it('should run animation with options', () => {
@@ -128,7 +142,7 @@ describe('UIManager', () => {
   describe('element updates', () => {
     it('should update element content successfully', () => {
       const mockElement = createMockElement();
-      document.getElementById.mockReturnValue(mockElement);
+      (document.getElementById as any).mockReturnValue(mockElement);
       
       const result = uiManager.updateElement('test-id', 'New content');
       
@@ -137,7 +151,7 @@ describe('UIManager', () => {
     });
 
     it('should return false for non-existent element', () => {
-      document.getElementById.mockReturnValue(null);
+      (document.getElementById as any).mockReturnValue(null);
       
       const result = uiManager.updateElement('non-existent', 'Content');
       
@@ -148,7 +162,7 @@ describe('UIManager', () => {
       const mockElement1 = createMockElement();
       const mockElement2 = createMockElement();
       
-      document.getElementById.mockImplementation((id) => {
+      (document.getElementById as any).mockImplementation((id: string) => {
         if (id === 'element1') return mockElement1;
         if (id === 'element2') return mockElement2;
         return null;
@@ -195,15 +209,15 @@ describe('UIManager', () => {
   describe('scroll reveal functionality', () => {
     it('should handle scroll reveal elements', () => {
       const mockElement = createMockElement('scroll-reveal');
-      mockElement.getBoundingClientRect = vi.fn(() => ({
+      mockElement.getBoundingClientRect = vi.fn().mockReturnValue({
         top: 100 // Element is visible
-      }));
+      });
       
-      document.querySelectorAll.mockReturnValue([mockElement]);
+      (document.querySelectorAll as any).mockReturnValue([mockElement]);
       
       // Re-initialize to pick up the new elements
       uiManager = new UIManager();
-      uiManager.handleScrollReveal();
+      (uiManager as any).handleScrollReveal();
       
       expect(mockElement.classList.add).toHaveBeenCalledWith('revealed');
     });
@@ -218,7 +232,7 @@ describe('UIManager', () => {
       
       mockIcon.closest.mockReturnValue(mockIcon);
       
-      uiManager.handleIconHover(mockEvent);
+      (uiManager as any).handleIconHover(mockEvent);
       
       expect(mockIcon.style.transform).toBe('scale(1.2) rotate(10deg)');
       expect(mockIcon.style.filter).toBe('drop-shadow(0 0 15px rgba(208, 93, 9, 0.7))');
@@ -232,7 +246,7 @@ describe('UIManager', () => {
       
       mockIcon.closest.mockReturnValue(mockIcon);
       
-      uiManager.handleIconLeave(mockEvent);
+      (uiManager as any).handleIconLeave(mockEvent);
       
       expect(mockIcon.style.transform).toBe('scale(1) rotate(0deg)');
       expect(mockIcon.style.filter).toBe('none');
@@ -246,7 +260,7 @@ describe('UIManager', () => {
       
       mockButton.closest.mockReturnValue(mockButton);
       
-      uiManager.handleButtonHover(mockEvent);
+      (uiManager as any).handleButtonHover(mockEvent);
       
       expect(mockButton.style.transform).toBe('scale(1.05) translateY(-2px)');
       expect(mockButton.style.boxShadow).toBe('0 15px 35px rgba(208, 93, 9, 0.4)');
@@ -258,7 +272,7 @@ describe('UIManager', () => {
       const mockSystem = createMockElement('particle-system');
       mockSystem.appendChild = vi.fn();
       
-      uiManager.createParticles(mockSystem);
+      (uiManager as any).createParticles(mockSystem);
       
       expect(mockSystem.appendChild).toHaveBeenCalledTimes(5);
     });

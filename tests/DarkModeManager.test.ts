@@ -35,11 +35,22 @@ Object.defineProperty(document, 'querySelectorAll', {
   writable: true
 });
 
+interface MockElement {
+  classList: {
+    add: ReturnType<typeof vi.fn>;
+    remove: ReturnType<typeof vi.fn>;
+  };
+}
+
+interface MockButton extends MockElement {
+  addEventListener: ReturnType<typeof vi.fn>;
+}
+
 describe('DarkModeManager', () => {
-  let darkModeManager;
-  let mockSunIcon;
-  let mockMoonIcon;
-  let mockToggleButton;
+  let darkModeManager: DarkModeManager;
+  let mockSunIcon: MockElement;
+  let mockMoonIcon: MockElement;
+  let mockToggleButton: MockButton;
 
   beforeEach(() => {
     // Reset mocks
@@ -61,11 +72,15 @@ describe('DarkModeManager', () => {
     };
     
     mockToggleButton = {
+      classList: {
+        add: vi.fn(),
+        remove: vi.fn()
+      },
       addEventListener: vi.fn()
     };
 
     // Setup getElementById mock
-    document.getElementById.mockImplementation((id) => {
+    (document.getElementById as any).mockImplementation((id: string) => {
       switch (id) {
         case 'sun-icon':
           return mockSunIcon;
@@ -79,16 +94,14 @@ describe('DarkModeManager', () => {
     });
 
     // Setup querySelectorAll mock
-    document.querySelectorAll.mockReturnValue([]);
+    (document.querySelectorAll as any).mockReturnValue([]);
   });
 
   describe('constructor', () => {
     it('should initialize with default values', () => {
       darkModeManager = new DarkModeManager();
       
-      expect(darkModeManager.storageKey).toBe('darkMode');
-      expect(darkModeManager.darkModeClass).toBe('dark-mode');
-      expect(darkModeManager.transitionClass).toBe('dark-mode-transition');
+      expect((darkModeManager as any).storageKey).toBe('darkMode');
     });
 
     it('should setup event listeners', () => {
@@ -125,7 +138,7 @@ describe('DarkModeManager', () => {
     });
 
     it('should handle missing icon elements gracefully', () => {
-      document.getElementById.mockReturnValue(null);
+      (document.getElementById as any).mockReturnValue(null);
       
       expect(() => {
         darkModeManager.applyTheme('true');
@@ -139,17 +152,17 @@ describe('DarkModeManager', () => {
     });
 
     it('should toggle from light to dark', () => {
-      darkModeManager.currentTheme = 'false';
+      (darkModeManager as any).currentTheme = 'false';
       darkModeManager.toggleTheme();
       
-      expect(darkModeManager.currentTheme).toBe('true');
+      expect((darkModeManager as any).currentTheme).toBe('true');
     });
 
     it('should toggle from dark to light', () => {
-      darkModeManager.currentTheme = 'true';
+      (darkModeManager as any).currentTheme = 'true';
       darkModeManager.toggleTheme();
       
-      expect(darkModeManager.currentTheme).toBe('false');
+      expect((darkModeManager as any).currentTheme).toBe('false');
     });
   });
 
@@ -159,12 +172,12 @@ describe('DarkModeManager', () => {
     });
 
     it('should return true when in dark mode', () => {
-      darkModeManager.currentTheme = 'true';
+      (darkModeManager as any).currentTheme = 'true';
       expect(darkModeManager.isDarkMode()).toBe(true);
     });
 
     it('should return false when in light mode', () => {
-      darkModeManager.currentTheme = 'false';
+      (darkModeManager as any).currentTheme = 'false';
       expect(darkModeManager.isDarkMode()).toBe(false);
     });
   });

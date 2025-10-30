@@ -1,97 +1,98 @@
+import { 
+  ConfigValues, 
+  ConfigKey, 
+  ConfigChangeObserver, 
+  Capabilities, 
+  ObserverPattern 
+} from '../types.js';
+
 /**
  * Configuration Management Service
  * Follows Single Responsibility Principle - only handles configuration
  * Follows Dependency Inversion Principle - depends on abstractions
  */
-export class ConfigManager {
-  constructor() {
-    this.defaultConfig = {
-      company_name: "Code-Roast",
-      hero_title: "Understanding Data Analysis & Business Intelligence",
-      hero_subtitle: "Comprehensive insights into how data drives modern business decisions",
-      cta_button: "Learn More",
-      section_one_title: "The Foundation of Data Analysis",
-      section_two_title: "Business Intelligence Explained", 
-      section_three_title: "Data Analysis Methodologies",
-      footer_text: "© 2024 Code-Roast. Advancing data literacy and business intelligence.",
-      background_color: "#d05d09",
-      surface_color: "#ffffff",
-      text_color: "#2c3e50",
-      primary_action_color: "#8b4513",
-      secondary_action_color: "#d05d09",
-      font_family: "Inter",
-      font_size: 16
-    };
+export class ConfigManager implements ObserverPattern<Partial<ConfigValues>> {
+  private readonly defaultConfig: ConfigValues = {
+    company_name: "Code-Roast",
+    hero_title: "Understanding Data Analysis & Business Intelligence",
+    hero_subtitle: "Comprehensive insights into how data drives modern business decisions",
+    cta_button: "Learn More",
+    section_one_title: "The Foundation of Data Analysis",
+    section_two_title: "Business Intelligence Explained", 
+    section_three_title: "Data Analysis Methodologies",
+    footer_text: "© 2024 Code-Roast. Advancing data literacy and business intelligence.",
+    background_color: "#d05d09",
+    surface_color: "#ffffff",
+    text_color: "#2c3e50",
+    primary_action_color: "#8b4513",
+    secondary_action_color: "#d05d09",
+    font_family: "Inter",
+    font_size: 16
+  };
 
+  private currentConfig: ConfigValues;
+  public observers: ConfigChangeObserver[] = [];
+
+  constructor() {
     this.currentConfig = { ...this.defaultConfig };
-    this.observers = [];
   }
 
   /**
    * Get configuration value
-   * @param {string} key - Configuration key
-   * @returns {any} Configuration value
    */
-  get(key) {
-    return this.currentConfig[key] || this.defaultConfig[key];
+  get<K extends ConfigKey>(key: K): ConfigValues[K] {
+    return this.currentConfig[key] ?? this.defaultConfig[key];
   }
 
   /**
    * Set configuration value
-   * @param {string} key - Configuration key
-   * @param {any} value - Configuration value
    */
-  set(key, value) {
+  set<K extends ConfigKey>(key: K, value: ConfigValues[K]): void {
     this.currentConfig[key] = value;
-    this.notifyObservers({ [key]: value });
+    this.notifyObservers({ [key]: value } as Partial<ConfigValues>);
   }
 
   /**
    * Set multiple configuration values
-   * @param {Object} config - Configuration object
    */
-  setConfig(config) {
+  setConfig(config: Partial<ConfigValues>): void {
     Object.assign(this.currentConfig, config);
     this.notifyObservers(config);
   }
 
   /**
    * Get all configuration
-   * @returns {Object} Current configuration
    */
-  getAll() {
+  getAll(): ConfigValues {
     return { ...this.currentConfig };
   }
 
   /**
    * Reset to default configuration
    */
-  reset() {
+  reset(): void {
     this.currentConfig = { ...this.defaultConfig };
     this.notifyObservers(this.currentConfig);
   }
 
   /**
    * Add observer for configuration changes
-   * @param {Function} callback - Callback function to call on config change
    */
-  addObserver(callback) {
+  addObserver(callback: ConfigChangeObserver): void {
     this.observers.push(callback);
   }
 
   /**
    * Remove observer
-   * @param {Function} callback - Callback function to remove
    */
-  removeObserver(callback) {
+  removeObserver(callback: ConfigChangeObserver): void {
     this.observers = this.observers.filter(observer => observer !== callback);
   }
 
   /**
    * Notify all observers of configuration changes
-   * @param {Object} changes - Changed configuration values
    */
-  notifyObservers(changes) {
+  notifyObservers(changes: Partial<ConfigValues>): void {
     this.observers.forEach(observer => {
       try {
         observer(changes);
@@ -103,11 +104,9 @@ export class ConfigManager {
 
   /**
    * Validate configuration
-   * @param {Object} config - Configuration to validate
-   * @returns {boolean} True if valid
    */
-  validate(config) {
-    const requiredKeys = Object.keys(this.defaultConfig);
+  validate(config: Partial<ConfigValues>): boolean {
+    const requiredKeys = Object.keys(this.defaultConfig) as ConfigKey[];
     return requiredKeys.every(key => {
       const value = config[key];
       return value !== undefined && value !== null;
@@ -116,49 +115,47 @@ export class ConfigManager {
 
   /**
    * Get capabilities mapping for editing
-   * @returns {Object} Capabilities object
    */
-  getCapabilities() {
+  getCapabilities(): Capabilities {
     return {
       recolorables: [
         {
           get: () => this.get('background_color'),
-          set: (value) => this.set('background_color', value)
+          set: (value: string) => this.set('background_color', value)
         },
         {
           get: () => this.get('surface_color'),
-          set: (value) => this.set('surface_color', value)
+          set: (value: string) => this.set('surface_color', value)
         },
         {
           get: () => this.get('text_color'),
-          set: (value) => this.set('text_color', value)
+          set: (value: string) => this.set('text_color', value)
         },
         {
           get: () => this.get('primary_action_color'),
-          set: (value) => this.set('primary_action_color', value)
+          set: (value: string) => this.set('primary_action_color', value)
         },
         {
           get: () => this.get('secondary_action_color'),
-          set: (value) => this.set('secondary_action_color', value)
+          set: (value: string) => this.set('secondary_action_color', value)
         }
       ],
       borderables: [],
       fontEditable: {
         get: () => this.get('font_family'),
-        set: (value) => this.set('font_family', value)
+        set: (value: string) => this.set('font_family', value)
       },
       fontSizeable: {
         get: () => this.get('font_size'),
-        set: (value) => this.set('font_size', value)
+        set: (value: number) => this.set('font_size', value)
       }
     };
   }
 
   /**
    * Get edit panel values mapping
-   * @returns {Map} Map of editable values
    */
-  getEditPanelValues() {
+  getEditPanelValues(): Map<string, unknown> {
     return new Map([
       ["company_name", this.get('company_name')],
       ["hero_title", this.get('hero_title')],

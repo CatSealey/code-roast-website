@@ -1,21 +1,41 @@
+import { 
+  UIEventType, 
+  UIEventData, 
+  UIObserver
+} from '../types.js';
+
+interface ModalOptions {
+  backdropClose?: boolean;
+  escapeClose?: boolean;
+}
+
+interface AnimationOptions {
+  duration?: number;
+  easing?: string;
+  delay?: number;
+  [key: string]: unknown;
+}
+
+type AnimationCallback = (options: AnimationOptions) => void;
+
 /**
  * User Interface Manager
  * Follows Single Responsibility Principle - handles UI interactions and animations
  */
 export class UIManager {
+  private readonly observerMap = new Map<UIEventType, Set<UIObserver>>();
+  private readonly animationCallbacks = new Map<string, AnimationCallback>();
+  private readonly scrollRevealElements = new Set<Element>();
+  private readonly particleSystems = new Set<HTMLElement>();
+
   constructor() {
-    this.observers = new Map();
-    this.animationCallbacks = new Map();
-    this.scrollRevealElements = new Set();
-    this.particleSystems = new Set();
-    
     this.init();
   }
 
   /**
    * Initialize UI manager
    */
-  init() {
+  private init(): void {
     this.setupScrollReveal();
     this.setupSmoothScrolling();
     this.setupInteractiveIcons();
@@ -26,7 +46,7 @@ export class UIManager {
   /**
    * Setup scroll reveal animations
    */
-  setupScrollReveal() {
+  private setupScrollReveal(): void {
     const revealElements = document.querySelectorAll('.scroll-reveal');
     revealElements.forEach(element => {
       this.scrollRevealElements.add(element);
@@ -39,7 +59,7 @@ export class UIManager {
   /**
    * Handle scroll reveal animation
    */
-  handleScrollReveal() {
+  private handleScrollReveal(): void {
     this.scrollRevealElements.forEach(element => {
       const windowHeight = window.innerHeight;
       const elementTop = element.getBoundingClientRect().top;
@@ -55,16 +75,19 @@ export class UIManager {
   /**
    * Setup smooth scrolling for navigation links
    */
-  setupSmoothScrolling() {
+  private setupSmoothScrolling(): void {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', (e) => {
         e.preventDefault();
-        const target = document.querySelector(anchor.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+        const href = (anchor as HTMLAnchorElement).getAttribute('href');
+        if (href) {
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
         }
       });
     });
@@ -73,7 +96,7 @@ export class UIManager {
   /**
    * Setup interactive icon animations
    */
-  setupInteractiveIcons() {
+  private setupInteractiveIcons(): void {
     document.querySelectorAll('.interactive-icon').forEach(icon => {
       icon.addEventListener('mouseenter', this.handleIconHover.bind(this));
       icon.addEventListener('mouseleave', this.handleIconLeave.bind(this));
@@ -82,10 +105,10 @@ export class UIManager {
 
   /**
    * Handle icon hover effect
-   * @param {Event} event - Mouse event
    */
-  handleIconHover(event) {
-    const icon = event.target.closest('.interactive-icon');
+  private handleIconHover(event: Event): void {
+    const target = event.target as HTMLElement;
+    const icon = target.closest('.interactive-icon') as HTMLElement;
     if (icon) {
       icon.style.transform = 'scale(1.2) rotate(10deg)';
       icon.style.filter = 'drop-shadow(0 0 15px rgba(208, 93, 9, 0.7))';
@@ -94,10 +117,10 @@ export class UIManager {
 
   /**
    * Handle icon leave effect
-   * @param {Event} event - Mouse event
    */
-  handleIconLeave(event) {
-    const icon = event.target.closest('.interactive-icon');
+  private handleIconLeave(event: Event): void {
+    const target = event.target as HTMLElement;
+    const icon = target.closest('.interactive-icon') as HTMLElement;
     if (icon) {
       icon.style.transform = 'scale(1) rotate(0deg)';
       icon.style.filter = 'none';
@@ -107,18 +130,18 @@ export class UIManager {
   /**
    * Setup particle systems
    */
-  setupParticles() {
+  private setupParticles(): void {
     document.querySelectorAll('.particle-system').forEach(system => {
-      this.createParticles(system);
-      this.particleSystems.add(system);
+      const htmlSystem = system as HTMLElement;
+      this.createParticles(htmlSystem);
+      this.particleSystems.add(htmlSystem);
     });
   }
 
   /**
    * Create particles for a particle system
-   * @param {HTMLElement} system - Particle system container
    */
-  createParticles(system) {
+  private createParticles(system: HTMLElement): void {
     for (let i = 0; i < 5; i++) {
       const particle = document.createElement('div');
       particle.className = 'particle';
@@ -132,7 +155,7 @@ export class UIManager {
   /**
    * Setup button animations
    */
-  setupButtonAnimations() {
+  private setupButtonAnimations(): void {
     document.querySelectorAll('.morphing-button').forEach(button => {
       button.addEventListener('mouseenter', this.handleButtonHover.bind(this));
       button.addEventListener('mouseleave', this.handleButtonLeave.bind(this));
@@ -142,10 +165,10 @@ export class UIManager {
 
   /**
    * Handle button hover effect
-   * @param {Event} event - Mouse event
    */
-  handleButtonHover(event) {
-    const button = event.target.closest('.morphing-button');
+  private handleButtonHover(event: Event): void {
+    const target = event.target as HTMLElement;
+    const button = target.closest('.morphing-button') as HTMLElement;
     if (button) {
       button.style.transform = 'scale(1.05) translateY(-2px)';
       button.style.boxShadow = '0 15px 35px rgba(208, 93, 9, 0.4)';
@@ -154,10 +177,10 @@ export class UIManager {
 
   /**
    * Handle button leave effect
-   * @param {Event} event - Mouse event
    */
-  handleButtonLeave(event) {
-    const button = event.target.closest('.morphing-button');
+  private handleButtonLeave(event: Event): void {
+    const target = event.target as HTMLElement;
+    const button = target.closest('.morphing-button') as HTMLElement;
     if (button) {
       button.style.transform = 'scale(1) translateY(0)';
       button.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
@@ -166,10 +189,10 @@ export class UIManager {
 
   /**
    * Handle button click animation
-   * @param {Event} event - Click event
    */
-  handleButtonClick(event) {
-    const button = event.target.closest('.morphing-button');
+  private handleButtonClick(event: Event): void {
+    const target = event.target as HTMLElement;
+    const button = target.closest('.morphing-button') as HTMLElement;
     if (button) {
       button.style.transform = 'scale(0.95)';
       setTimeout(() => {
@@ -178,28 +201,30 @@ export class UIManager {
       setTimeout(() => {
         button.style.transform = 'scale(1)';
       }, 200);
+
+      this.triggerObservers('buttonClick', {
+        type: 'buttonClick',
+        element: button,
+        timestamp: Date.now()
+      });
     }
   }
 
   /**
-   * Add observer for UI events
-   * @param {string} eventType - Type of event to observe
-   * @param {Function} callback - Callback function
+   * Add observer for UI events (Map-based)
    */
-  addObserver(eventType, callback) {
-    if (!this.observers.has(eventType)) {
-      this.observers.set(eventType, new Set());
+  addObserver(eventType: UIEventType, callback: UIObserver): void {
+    if (!this.observerMap.has(eventType)) {
+      this.observerMap.set(eventType, new Set());
     }
-    this.observers.get(eventType).add(callback);
+    this.observerMap.get(eventType)!.add(callback);
   }
 
   /**
    * Remove observer
-   * @param {string} eventType - Type of event
-   * @param {Function} callback - Callback function to remove
    */
-  removeObserver(eventType, callback) {
-    const callbacks = this.observers.get(eventType);
+  removeObserver(eventType: UIEventType, callback: UIObserver): void {
+    const callbacks = this.observerMap.get(eventType);
     if (callbacks) {
       callbacks.delete(callback);
     }
@@ -207,15 +232,13 @@ export class UIManager {
 
   /**
    * Trigger observers for an event
-   * @param {string} eventType - Type of event
-   * @param {any} data - Event data
    */
-  triggerObservers(eventType, data) {
-    const callbacks = this.observers.get(eventType);
+  private triggerObservers(eventType: UIEventType, data: UIEventData): void {
+    const callbacks = this.observerMap.get(eventType);
     if (callbacks) {
-      callbacks.forEach(callback => {
+      callbacks.forEach((callback: UIObserver) => {
         try {
-          callback(data);
+          callback(eventType, data);
         } catch (error) {
           console.error(`Error in UI observer for ${eventType}:`, error);
         }
@@ -225,19 +248,15 @@ export class UIManager {
 
   /**
    * Add animation callback
-   * @param {string} name - Animation name
-   * @param {Function} callback - Animation callback
    */
-  addAnimation(name, callback) {
+  addAnimation(name: string, callback: AnimationCallback): void {
     this.animationCallbacks.set(name, callback);
   }
 
   /**
    * Run animation
-   * @param {string} name - Animation name
-   * @param {any} options - Animation options
    */
-  runAnimation(name, options = {}) {
+  runAnimation(name: string, options: AnimationOptions = {}): void {
     const callback = this.animationCallbacks.get(name);
     if (callback) {
       callback(options);
@@ -246,10 +265,13 @@ export class UIManager {
 
   /**
    * Show modal
-   * @param {string} content - Modal content HTML
-   * @param {Object} options - Modal options
    */
-  showModal(content, options = {}) {
+  showModal(content: string, options: ModalOptions = {}): HTMLElement {
+    const {
+      backdropClose = true,
+      escapeClose = true
+    } = options;
+
     const overlay = document.createElement('div');
     overlay.className = 'fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50';
     overlay.style.backdropFilter = 'blur(5px)';
@@ -258,20 +280,24 @@ export class UIManager {
     document.body.appendChild(overlay);
 
     // Add click outside to close
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        overlay.remove();
-      }
-    });
+    if (backdropClose) {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          overlay.remove();
+        }
+      });
+    }
 
     // Add escape key to close
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') {
-        overlay.remove();
-        document.removeEventListener('keydown', handleEscape);
-      }
-    };
-    document.addEventListener('keydown', handleEscape);
+    if (escapeClose) {
+      const handleEscape = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          overlay.remove();
+          document.removeEventListener('keydown', handleEscape);
+        }
+      };
+      document.addEventListener('keydown', handleEscape);
+    }
 
     // Trigger animation
     requestAnimationFrame(() => {
@@ -283,10 +309,8 @@ export class UIManager {
 
   /**
    * Update element content safely
-   * @param {string} id - Element ID
-   * @param {string} content - New content
    */
-  updateElement(id, content) {
+  updateElement(id: string, content: string): boolean {
     const element = document.getElementById(id);
     if (element) {
       element.textContent = content;
@@ -297,10 +321,9 @@ export class UIManager {
 
   /**
    * Update multiple elements
-   * @param {Object} updates - Object with id: content pairs
    */
-  updateElements(updates) {
-    const results = {};
+  updateElements(updates: Record<string, string>): Record<string, boolean> {
+    const results: Record<string, boolean> = {};
     Object.entries(updates).forEach(([id, content]) => {
       results[id] = this.updateElement(id, content);
     });

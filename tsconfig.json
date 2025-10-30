@@ -28,12 +28,14 @@
       "@/components/*": ["src/components/*"],
       "@/services/*": ["src/services/*"],
       "@/utils/*": ["src/utils/*"],
-      "@/styles/*": ["src/styles/*"]
+      "@/styles/*": ["src/styles/*"],
+      "@/types": ["src/types"]
     }
   },
   "include": [
     "src/**/*",
-    "tests/**/*"
+    "tests/**/*",
+    "vite.config.ts"
   ],
   "exclude": [
     "node_modules",
