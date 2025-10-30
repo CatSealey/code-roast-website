@@ -1,3 +1,11 @@
+@keyframes tealGlow {
+  0% {
+    box-shadow: 0 0 0px 0 var(--color-accent), 0 8px 32px rgba(0,0,0,0.10);
+  }
+  100% {
+    box-shadow: 0 0 32px 8px var(--color-accent), 0 8px 32px rgba(0,0,0,0.10);
+  }
+}
 /* Component-specific styles */
 
 /* Button Components */
@@ -43,7 +51,7 @@
 
 /* Card Components */
 .card {
-  background: var(--color-surface);
+  background-color: #fff !important;
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-md);
@@ -53,13 +61,18 @@
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-xl);
+  box-shadow: 0 0 1px 1px var(--color-accent), 0 1px 1px rgba(0,0,0,0.01) !important;
+}
+
+.dark-mode .card:hover {
+  box-shadow: 0 0 1px 1px var(--color-primary), 0 1px 1px rgba(0,0,0,0.01) !important;
 }
 
 .card-header {
   display: flex;
   align-items: center;
   margin-bottom: var(--spacing-lg);
+  color: #1a202c;
 }
 
 .card-icon {
@@ -76,13 +89,17 @@
 .card-title {
   font-size: var(--font-size-xl);
   font-weight: 600;
-  color: var(--color-text);
+  color: #1a202c;
   margin: 0;
 }
 
 .card-content {
-  color: var(--color-text-muted);
+  color: #243447;
   line-height: 1.6;
+}
+
+.dark-mode .card-content {
+  color: var(--color-dark-text);
 }
 
 /* Glass Effect */
@@ -183,7 +200,7 @@
 .process-steps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--spacing-xl);
+  gap: var(--spacing-ml);
   margin-top: var(--spacing-2xl);
 }
 
@@ -214,11 +231,20 @@
 .process-step-title {
   font-weight: 600;
   margin-bottom: var(--spacing-sm);
+  color: #243447;
+}
+
+.dark-mode .process-step-title {
+  color: var(--color-dark-text);
 }
 
 .process-step-description {
-  color: var(--color-text-muted);
+  color: #243447;
   font-size: var(--font-size-sm);
+}
+
+.dark-mode .process-step-description {
+  color: var(--color-dark-text);
 }
 
 /* Feature Lists */
@@ -235,11 +261,20 @@
   border-radius: var(--radius-md);
   transition: all var(--transition-normal);
   margin-bottom: var(--spacing-sm);
+  color: #243447;
+}
+
+.dark-mode .feature-item {
+  color: var(--color-dark-text);
 }
 
 .feature-item:hover {
-  background: var(--color-background);
+  background: rgba(17, 115, 116, 0.08) !important;
   transform: scale(1.02);
+}
+
+.dark-mode .feature-item:hover {
+  background: rgba(208, 93, 9, 0.08) !important;
 }
 
 .feature-dot {

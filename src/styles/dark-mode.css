@@ -1,3 +1,16 @@
+/* Card hover glow in dark mode */
+.dark-mode .card:hover {
+  box-shadow: 0 0 32px 8px var(--color-primary), 0 8px 32px rgba(0,0,0,0.20);
+}
+/* Section header text color in dark mode */
+.dark-mode h3 {
+  color: var(--color-dark-text) !important;
+}
+/* Card header and title text color in dark mode */
+.dark-mode .card-header,
+.dark-mode .card-title {
+  color: var(--color-dark-text) !important;
+}
 /* Dark Mode Styles */
 .dark-mode {
   --color-background: var(--color-dark-background);
@@ -51,8 +64,8 @@ body.dark-mode {
 }
 
 .dark-mode .card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background-color: var(--color-dark-surface) !important;
+  border: 1px solid var(--color-dark-border);
 }
 
 .dark-mode .card:hover {
