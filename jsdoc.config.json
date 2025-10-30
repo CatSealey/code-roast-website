@@ -1,0 +1,19 @@
+{
+  "plugins": ["@typescript-eslint"],
+  "source": {
+    "include": ["src/**/*"]
+  },
+  "opts": {
+    "destination": "docs/output/"
+  },
+  "recurseDepth": 10,
+  "sourceType": "module",
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc","closure"]
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  }
+}

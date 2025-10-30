@@ -1,0 +1,10 @@
+/* TailwindCSS imports - must come first */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom styles - imported after Tailwind */
+@import './base.css';
+@import './components.css';
+@import './utilities.css';
+@import './dark-mode.css';
