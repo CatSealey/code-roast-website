@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-800 text-white py-8">
       <div className="container mx-auto px-6 text-center">
-        <p id="footer-text">{t('footer.text')}</p>
+        <p id="footer-text">{t('footer.copyright')}</p>
       </div>
     </footer>
   );

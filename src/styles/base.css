@@ -15,7 +15,12 @@
   --color-text: #2c3e50;
   --color-text-muted: #64748b;
   --color-border: #e2e8f0;
-  
+
+  /*Line colors */
+  --color-line1: #005f73;
+  --color-line2: #0a9396;
+  --color-line3: #0077b6;
+
   /* Dark mode colors */
   --color-dark-background: #0f172a;
   --color-dark-surface: #1e293b;

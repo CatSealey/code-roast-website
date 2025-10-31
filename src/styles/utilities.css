@@ -206,27 +206,33 @@
 /* Chart Animations */
 .line-chart {
   position: relative;
-  width: 100%;
+  width: 110%;
   height: 100%;
+  margin-top: -160px;
 }
 
 .chart-line {
   position: absolute;
   stroke-width: 3;
   fill: none;
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: drawLine 3s ease-out forwards;
 }
 
 .chart-line.line1 {
-  stroke: var(--color-primary);
+  stroke: var(--color-line1);
   animation-delay: 0.5s;
+  filter: drop-shadow(0 0 5px var(--color-line1));
 }
 
 .chart-line.line2 {
-  stroke: var(--color-accent);
+  stroke: var(--color-line2);
   animation-delay: 1s;
+  filter: drop-shadow(0 0 5px var(--color-line2));
+}
+
+.chart-line.line3 {
+  stroke: var(--color-line3);
+  animation-delay: 1s;
+  filter: drop-shadow(0 0 5px var(--color-line3));
 }
 
 .chart-dot {
