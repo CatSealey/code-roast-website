@@ -1,0 +1,86 @@
+{
+  "header": {
+    "title": "Code Roast",
+    "navHome": "Home",
+    "navServices": "Services",
+    "navBI": "Business Intelligence",
+    "navAbout": "About",
+    "navContact": "Contact"
+  },
+  "footer": {
+    "copyright": "© 2025 Code Roast. All rights reserved."
+  },
+  "hero": {
+    "title": "Understanding Data Analysis & Business Intelligence",
+    "subtitle": "Comprehensive insights into how data drives modern business decisions",
+    "cta": "Learn More"
+  },
+  "services": {
+    "title": "The Foundation of Data Analysis",
+    "whatIsTitle": "What is Data Analysis?",
+    "whatIsDesc": "Data analysis is the systematic process of inspecting, cleaning, transforming, and modeling data to discover useful information, draw conclusions, and support decision-making. It involves statistical techniques, computational methods, and domain expertise to extract meaningful patterns from raw data.",
+    "typesTitle": "Types of Data Analysis",
+    "typesDescriptive": "Descriptive: What happened? (Historical data summary)",
+    "typesDiagnostic": "Diagnostic: Why did it happen? (Root cause analysis)",
+    "typesPredictive": "Predictive: What might happen? (Future trend forecasting)",
+    "typesPrescriptive": "Prescriptive: What should we do? (Actionable recommendations)",
+    "keyTitle": "Key Components",
+    "keyCollection": "Data Collection: Gathering relevant data from various sources including databases, APIs, surveys, and sensors.",
+    "keyProcessing": "Data Processing: Cleaning, transforming, and structuring data to ensure quality and consistency.",
+    "keyStatistical": "Statistical Analysis: Applying mathematical and statistical methods to identify patterns and relationships.",
+    "keyVisualization": "Visualization: Creating charts, graphs, and dashboards to communicate findings effectively."
+  },
+  "bi": {
+    "title": "Business Intelligence Solutions",
+    "understandingTitle": "Understanding Business Intelligence",
+    "understandingDesc": "Business Intelligence (BI) refers to the technologies, applications, strategies, and practices used to collect, analyze, integrate, and present business information. BI systems help organizations make data-driven decisions by transforming raw data into meaningful and useful information.",
+    "coreTitle": "Core BI Components",
+    "coreWarehousing": "Data Warehousing: Centralized repositories for storing integrated data",
+    "coreETL": "ETL Processes: Extract, Transform, Load operations for data preparation",
+    "coreOLAP": "OLAP: Online Analytical Processing for multidimensional analysis",
+    "coreReporting": "Reporting Tools: Automated generation of business reports",
+    "coreDashboards": "Dashboards: Visual interfaces displaying key performance indicators",
+    "vsTitle": "BI vs Traditional Reporting",
+    "vsTraditional": "Traditional Reporting: Static reports, historical focus, limited interactivity, scheduled delivery",
+    "vsBI": "Business Intelligence: Interactive dashboards, real-time data, predictive capabilities, self-service analytics",
+    "keyTitle": "Key Benefits",
+    "keyIntegration": "Data Integration: Unified view of business operations",
+    "keyMonitoring": "Performance Monitoring: Real-time KPI tracking",
+    "keyPlanning": "Strategic Planning: Data-driven decision making"
+  },
+  "about": {
+    "title": "Our Approach",
+    "statisticalTitle": "Statistical Methods",
+    "statisticalRegression": "Regression Analysis: Examining relationships between variables to predict outcomes and identify influential factors.",
+    "statisticalHypothesis": "Hypothesis Testing: Statistical procedures to validate assumptions and test theories using sample data.",
+    "statisticalTimeSeries": "Time Series Analysis: Analyzing data points collected over time to identify trends, patterns, and seasonal variations.",
+    "mlTitle": "Machine Learning Approaches",
+    "mlSupervised": "Supervised Learning: Training models on labeled data to make predictions",
+    "mlUnsupervised": "Unsupervised Learning: Discovering hidden patterns without labels",
+    "mlClustering": "Clustering: Grouping similar data points into segments",
+    "miningTitle": "Data Mining Techniques",
+    "miningAssociation": "Association Rules: Finding relationships between items in datasets",
+    "miningClassification": "Classification: Categorizing data into predefined classes",
+    "miningAnomaly": "Anomaly Detection: Identifying unusual patterns or outliers",
+    "visualizationTitle": "Visualization Methods",
+    "visualizationExploratory": "Exploratory Visualization: Interactive charts for data exploration and hypothesis generation.",
+    "visualizationExplanatory": "Explanatory Visualization: Clear visuals designed to communicate insights to stakeholders.",
+    "visualizationDashboard": "Dashboard Design: Comprehensive interfaces displaying multiple metrics in real-time.",
+    "processTitle": "The Data Analysis Process",
+    "processDefine": "Define",
+    "processDefineDesc": "Identify business questions and objectives",
+    "processCollect": "Collect",
+    "processCollectDesc": "Gather relevant data from various sources",
+    "processClean": "Clean",
+    "processCleanDesc": "Process and prepare data for analysis",
+    "processAnalyze": "Analyze",
+    "processAnalyzeDesc": "Apply statistical and analytical methods",
+    "processInterpret": "Interpret",
+    "processInterpretDesc": "Draw conclusions and communicate findings"
+  },
+  "contact": {
+    "title": "Learn More About Data Analysis",
+    "description": "Explore how data analysis and business intelligence can inform better decision-making in your organization.",
+    "cta": "Explore Resources"
+  }
+}

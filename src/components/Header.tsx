@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
   const [darkMode, setDarkMode] = useState(() => {
@@ -18,8 +19,9 @@ const Header: React.FC = () => {
     });
   };
 
+  const { t } = useTranslation();
   return (
-    <header className="gradient-bg text-white shadow-lg relative">
+    <header className="gradient-bg text-white shadow-lg relative py-3">
       <div className="floating-shapes">
         <div className="shape">
           <svg width="60" height="60" viewBox="0 0 24 24" fill="rgba(255,255,255,0.1)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
@@ -34,18 +36,16 @@ const Header: React.FC = () => {
           <svg width="35" height="35" viewBox="0 0 24 24" fill="rgba(255,255,255,0.1)"><rect x="3" y="3" width="18" height="18" rx="2" /></svg>
         </div>
       </div>
-      <nav className="container mx-auto px-6 py-4 relative z-10">
+      <nav className="container mx-auto px-6 py-10 relative z-10">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <svg className="w-8 h-8 interactive-icon" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M3 3h18v18H3V3zm16 16V5H5v14h14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z" />
-            </svg>
-            <h1 id="company-name" className="text-2xl font-bold neon-text">Code-Roast</h1>
+          <div className="flex items-center space-x-1">
+            <img src="/code-roast-white-icon.png" alt="Code-Roast Logo" className="w-8 h-8 interactive-icon" />
+            <img src="/code-roast-white-text.png" alt="Code-Roast" className="h-6" />
           </div>
           <div className="flex space-x-6 items-center">
-            <a href="#services" className="hover:text-orange-200 transition-all duration-300 hover:scale-110">Services</a>
-            <a href="#about" className="hover:text-orange-200 transition-all duration-300 hover:scale-110">About</a>
-            <a href="#contact" className="hover:text-orange-200 transition-all duration-300 hover:scale-110">Contact</a>
+            <a href="#services" className="text-white hover:text-orange-200 transition-all duration-300 hover:scale-110">{t('header.navServices')}</a>
+            <a href="#about" className="text-white hover:text-orange-200 transition-all duration-300 hover:scale-110">{t('header.navAbout')}</a>
+            <a href="#contact" className="text-white hover:text-orange-200 transition-all duration-300 hover:scale-110">{t('header.navContact')}</a>
             <button
               id="dark-mode-toggle"
               className="ml-4 p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 interactive-icon"

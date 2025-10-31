@@ -1,11 +1,15 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-const Footer: React.FC = () => (
-  <footer className="bg-gray-800 text-white py-8">
-    <div className="container mx-auto px-6 text-center">
-      <p id="footer-text">© 2024 Code-Roast. Empowering businesses through data.</p>
-    </div>
-  </footer>
-);
+const Footer: React.FC = () => {
+  const { t } = useTranslation();
+  return (
+    <footer className="bg-gray-800 text-white py-8">
+      <div className="container mx-auto px-6 text-center">
+        <p id="footer-text">{t('footer.text')}</p>
+      </div>
+    </footer>
+  );
+};
 
 export default Footer;

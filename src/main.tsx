@@ -8,6 +8,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import './styles/main.css';
+import './i18n';
 
 const App: React.FC = () => (
   <>
