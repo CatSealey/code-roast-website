@@ -1,3 +1,39 @@
+/* Typewriter cursor animation */
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 1ch;
+  font-size: inherit;
+  line-height: 1;
+  position: relative;
+  vertical-align: baseline;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+/* Fade-in animation for hero subtitle lines */
+.subtitle-fade {
+  opacity: 0;
+  animation: subtitleFadeIn 0.8s forwards;
+}
+
+@keyframes subtitleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
 @keyframes tealGlow {
   0% {
     box-shadow: 0 0 0px 0 var(--color-accent), 0 8px 32px rgba(0,0,0,0.10);

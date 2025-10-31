@@ -1,10 +1,49 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
+  // Get subtitles as separate keys
+  const subtitle1 = t('hero.subtitle1');
+  const subtitle2 = t('hero.subtitle2');
+  const subtitle3 = t('hero.subtitle3');
+
+  // Typewriter effect for each subtitle line
+  const [typed1, setTyped1] = useState('');
+  const [typed2, setTyped2] = useState('');
+  const [typed3, setTyped3] = useState('');
+
+  // Typewriter for subtitle1
+  useEffect(() => {
+    if (typed1.length < subtitle1.length) {
+      const timer = setTimeout(() => {
+        setTyped1(subtitle1.slice(0, typed1.length + 1));
+      }, 30);
+      return () => clearTimeout(timer);
+    }
+  }, [typed1, subtitle1]);
+
+  // Typewriter for subtitle2 (starts after subtitle1 is done)
+  useEffect(() => {
+    if (typed1.length === subtitle1.length && typed2.length < subtitle2.length) {
+      const timer = setTimeout(() => {
+        setTyped2(subtitle2.slice(0, typed2.length + 1));
+      }, 30);
+      return () => clearTimeout(timer);
+    }
+  }, [typed1, typed2, subtitle1, subtitle2]);
+
+  // Typewriter for subtitle3 (starts after subtitle2 is done)
+  useEffect(() => {
+    if (typed2.length === subtitle2.length && typed3.length < subtitle3.length) {
+      const timer = setTimeout(() => {
+        setTyped3(subtitle3.slice(0, typed3.length + 1));
+      }, 30);
+      return () => clearTimeout(timer);
+    }
+  }, [typed2, typed3, subtitle2, subtitle3]);
   return (
     <section className="gradient-bg text-white py-20 relative overflow-hidden">
       <div className="floating-shapes">
@@ -19,12 +58,29 @@ const Hero: React.FC = () => {
         </div>
       </div>
       <div className="container mx-auto px-6 text-center relative z-10">
-        <h2 id="hero-title" className="text-5xl md:text-6xl font-bold mb-6 fade-in neon-text">
+        <h2 id="hero-title" className="text-5xl md:text-6xl font-bold mb-6 fade-in neon-text text-left">
           {t('hero.title')}
         </h2>
-        <p id="hero-subtitle" className="text-xl md:text-2xl mb-8 opacity-90 fade-in typing-animation">
-          {t('hero.subtitle')}
-        </p>
+        <div id="hero-subtitle" className="text-xl md:text-2xl mb-8 opacity-90 fade-in text-left">
+          <p className="subtitle-fade">
+            <span>
+              {typed1}
+              {typed1.length < subtitle1.length ? <span className="typewriter-cursor">|</span> : null}
+            </span>
+          </p>
+          <p className="subtitle-fade">
+            <span>
+              {typed2}
+              {typed2.length < subtitle2.length ? <span className="typewriter-cursor">|</span> : null}
+            </span>
+          </p>
+          <p className="subtitle-fade">
+            <span>
+              {typed3}
+              {typed3.length < subtitle3.length ? <span className="typewriter-cursor">|</span> : null}
+            </span>
+          </p>
+        </div>
         <button id="cta-button" className="bg-white text-teal-600 px-8 py-4 rounded-lg text-lg font-semibold morphing-button pulse-animation shadow-2xl">
           {t('hero.cta')}
         </button>
