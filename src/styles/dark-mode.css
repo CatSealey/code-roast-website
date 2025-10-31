@@ -14,6 +14,7 @@
 /* Dark Mode Styles */
 .dark-mode {
   --color-background: var(--color-dark-background);
+  --color-background2: var(--color-dark-background2);
   --color-surface: var(--color-dark-surface);
   --color-text: var(--color-dark-text);
   --color-text-muted: var(--color-dark-text-muted);
@@ -29,6 +30,10 @@ body.dark-mode {
 /* Override Tailwind background classes in dark mode */
 .dark-mode .bg-gray-50 {
   background-color: var(--color-dark-background) !important;
+}
+
+.dark-mode .bg-gray-200 {
+  background-color: var(--color-dark-background2) !important;
 }
 
 .dark-mode .bg-white {

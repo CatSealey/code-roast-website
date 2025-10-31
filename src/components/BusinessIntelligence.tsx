@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 const BusinessIntelligence: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-200">
       <div className="container mx-auto px-6">
         <h3 id="section-two-title" className="text-4xl font-bold text-center mb-12 text-gray-800">
           {t('bi.title')}

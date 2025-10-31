@@ -73,7 +73,7 @@ const Hero: React.FC = () => {
         </div>
       </div>
       <div className="container mx-auto px-6 text-center relative z-10">
-        <h2 id="hero-title" className="text-5xl md:text-6xl font-bold mb-12 mt-12 fade-in neon-text text-left">
+        <h2 id="hero-title" className="text-5xl md:text-6xl font-semibold mb-12 mt-12 fade-in neon-text text-left">
           {t('hero.title')}
         </h2>
         <div id="hero-subtitle" className="text-xl md:text-2xl mb-8 opacity-90 fade-in text-left">
