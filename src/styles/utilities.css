@@ -203,6 +203,12 @@
   height: 300px;
 }
 
+.morphing-button--active {
+  background-color: var(--color-primary) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
 /* Chart Animations */
 .line-chart {
   position: relative;

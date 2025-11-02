@@ -1,11 +1,48 @@
 {
+  "community": {
+    "title": "Coding Community & Continual Education",
+    "description": "The coding community is a powerful force for learning, growth, and innovation. Continual education keeps us sharp and ready for new challenges.",
+    "tabs": {
+      "solid": {
+        "title": "SOLID Principles",
+        "content": [
+          "SOLID is a set of design principles that help developers write maintainable and scalable code.",
+          "S: Single Responsibility Principle",
+          "O: Open/Closed Principle",
+          "L: Liskov Substitution Principle",
+          "I: Interface Segregation Principle",
+          "D: Dependency Inversion Principle",
+          "Each principle helps you build better software."
+        ]
+      },
+      "triple": {
+        "title": "Triple Constraint",
+        "content": [
+          "The Triple Constraint is a project management concept: Scope, Time, Cost.",
+          "Balancing these three factors is key to successful project delivery.",
+          "Changing one affects the others."
+        ]
+      },
+      "bigo": {
+        "title": "Big O",
+        "content": [
+          "Big O notation describes the performance of algorithms.",
+          "It helps you analyze time and space complexity.",
+          "Understanding Big O is essential for writing efficient code."
+        ]
+      }
+    }
+  },
   "header": {
-    "title": "Code Roast",
-    "navHome": "Homebrew",
-    "navServices": "SaaS Shots",
-    "navBI": "Brewed Intelligence",
-    "navAbout": "Our Blend",
-    "navContact": "Get Caffeinated"
+  "title": "Code Roast",
+  "home": "Home",
+  "services": "Services",
+  "about": "About",
+  "contact": "Contact",
+  "community": "Community",
+  "solid": "SOLID Principles",
+  "triple": "Triple Constraint",
+  "bigo": "Big O"
   },
   "footer": {
     "copyright": "© 2025 Code Roast. Fueling coders, one roast at a time."
@@ -84,5 +121,37 @@
     "title": "Get Caffeinated: Connect With Us",
     "description": "Ready to fuel your next project? Whether you need a SaaS MVP, a code review, or just want to talk shop over coffee, Code Roast is here for you.",
     "cta": "Let’s Brew Something Great"
+  },
+  "learning": {
+    "title": "Brews: What is a Brew?",
+    "subTitle": "A Brew is a compact learning experience designed to grow your skills, refresh your knowledge, and spark exploration of deeper concepts you can use every day.",
+    "explanation": "We don’t all have time for lengthy courses, so our Brews are crafted to spark your curiosity — covering the topics that matter most, from development and data science to business and project management.",
+    "topics": [
+      "Principles",
+      "Laws",
+      "Rules",
+      "Guidelines",
+      "Concepts",
+      "Models",
+      "Frameworks",
+      "Methods",
+      "Processes",
+      "Practices"
+    ],
+    "exploreMore": "Explore More Brews",
+    "posts": {
+      "solid": {
+        "title": "SOLID Principles",
+        "desc": "Design principles for maintainable code."
+      },
+      "triple": {
+        "title": "Triple Constraint",
+        "desc": "Project management: Scope, Time, Cost."
+      },
+      "bigo": {
+        "title": "Big O",
+        "desc": "Algorithm efficiency and complexity."
+      }
+    }
   }
 }

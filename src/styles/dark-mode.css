@@ -59,6 +59,10 @@ body.dark-mode {
   color: var(--color-dark-text) !important;
 }
 
+.dark-mode .learning-text {
+  color: var(--color-dark-text) !important;
+}
+
 .dark-mode .gradient-bg {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 25%, #2c1810 60%, #1a0f08 85%, #0d0704 100%);
 }

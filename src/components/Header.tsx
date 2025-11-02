@@ -1,5 +1,7 @@
 
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
@@ -20,32 +22,82 @@ const Header: React.FC = () => {
   };
 
   const { t } = useTranslation();
+  // Dropdown state
+  const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
+  const [communityDropdownOpen, setCommunityDropdownOpen] = useState(false);
+    const homeRef = React.useRef<HTMLDivElement>(null);
+    const communityRef = React.useRef<HTMLDivElement>(null);
+
+  // Helper to get dropdown position
+  const getDropdownPosition = (ref: React.RefObject<HTMLDivElement | null>) => {
+    if (!ref.current) return { top: 0, left: 0 };
+    const rect = ref.current.getBoundingClientRect();
+    return { top: rect.bottom + window.scrollY, left: rect.left + window.scrollX };
+  };
+
+  // Dropdown menu portal
+  const DropdownMenu = ({ open, position, children, width }: { open: boolean, position: { top: number, left: number }, children: React.ReactNode, width: string }) => {
+    if (!open) return null;
+    return createPortal(
+      <div style={{ position: 'absolute', top: position.top, left: position.left, width, zIndex: 99999 }}
+        className="bg-white dark:bg-gray-900 rounded shadow-lg transition-all duration-300">
+        {children}
+      </div>,
+      document.body
+    );
+  };
+
   return (
     <header className="gradient-bg text-white shadow-lg relative py-3">
       <div className="floating-shapes">
+        {/* ...existing code... */}
         <div className="shape">
           <svg width="60" height="60" viewBox="0 0 24 24" fill="rgba(255,255,255,0.1)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
         </div>
-        <div className="shape">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="rgba(255,255,255,0.1)"><circle cx="12" cy="12" r="10" /></svg>
-        </div>
-        <div className="shape">
-          <svg width="50" height="50" viewBox="0 0 24 24" fill="rgba(255,255,255,0.1)"><polygon points="12,2 22,20 2,20" /></svg>
-        </div>
-        <div className="shape">
-          <svg width="35" height="35" viewBox="0 0 24 24" fill="rgba(255,255,255,0.1)"><rect x="3" y="3" width="18" height="18" rx="2" /></svg>
-        </div>
+        {/* ...existing code... */}
       </div>
       <nav className="container mx-auto px-6 py-10 relative z-10">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-1">
-            <img src="/code-roast-white-icon.png" alt="Code-Roast Logo" className="w-8 h-8 interactive-icon" />
-            <img src="/code-roast-white-text.png" alt="Code-Roast" className="h-6" />
+            {/* ...existing code... */}
+            <img src="/logo/code-roast-white-icon.png" alt="Code-Roast Logo" className="w-8 h-8 interactive-icon" />
+            <img src="/logo/code-roast-white-text.png" alt="Code-Roast" className="h-6" />
           </div>
           <div className="flex space-x-6 items-center">
-            <a href="#services" className="text-white hover:text-orange-200 transition-all duration-300 hover:scale-110">{t('header.navServices')}</a>
-            <a href="#about" className="text-white hover:text-orange-200 transition-all duration-300 hover:scale-110">{t('header.navAbout')}</a>
-            <a href="#contact" className="text-white hover:text-orange-200 transition-all duration-300 hover:scale-110">{t('header.navContact')}</a>
+            <div
+              className="relative"
+              ref={homeRef}
+              onMouseEnter={() => setHomeDropdownOpen(true)}
+              onMouseLeave={() => setHomeDropdownOpen(false)}
+            >
+              <Link to="/" className="text-white hover:text-orange-200 transition-all duration-300 hover:scale-110">{t('header.home')}</Link>
+              <DropdownMenu
+                open={homeDropdownOpen}
+                position={getDropdownPosition(homeRef)}
+                width="10rem"
+              >
+                <a href="/#services" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.services')}</a>
+                <a href="/#about" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.about')}</a>
+                <a href="/#contact" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.contact')}</a>
+              </DropdownMenu>
+            </div>
+            <div
+              className="relative"
+              ref={communityRef}
+              onMouseEnter={() => setCommunityDropdownOpen(true)}
+              onMouseLeave={() => setCommunityDropdownOpen(false)}
+            >
+              <Link to="/community" className="text-white hover:text-orange-200 transition-all duration-300 hover:scale-110">{t('header.community')}</Link>
+              <DropdownMenu
+                open={communityDropdownOpen}
+                position={getDropdownPosition(communityRef)}
+                width="14rem"
+              >
+                <a href="/community#solid" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.solid')}</a>
+                <a href="/community#triple" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.triple')}</a>
+                <a href="/community#bigo" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.bigo')}</a>
+              </DropdownMenu>
+            </div>
             <button
               id="dark-mode-toggle"
               className="ml-4 p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 interactive-icon"
