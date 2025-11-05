@@ -76,7 +76,7 @@ const Header: React.FC = () => {
                 position={getDropdownPosition(homeRef)}
                 width="10rem"
               >
-                <a href="/#services" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.services')}</a>
+                <a href="/#intro" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.intro')}</a>
                 <a href="/#about" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.about')}</a>
                 <a href="/#contact" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.contact')}</a>
               </DropdownMenu>

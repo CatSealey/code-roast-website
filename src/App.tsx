@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import Services from './components/Services';
+import Intro from './components/Intro';
 import BusinessIntelligence from './components/BusinessIntelligence';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -15,10 +15,10 @@ const MainPage = () => (
     <Header />
     <main>
       <Hero />
+      <Intro />
       <Learning />
-      <Services />
-      <BusinessIntelligence />
       <About />
+      <BusinessIntelligence />
       <Contact />
     </main>
     <Footer />

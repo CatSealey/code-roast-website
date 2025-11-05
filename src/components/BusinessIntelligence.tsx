@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 const BusinessIntelligence: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <section className="py-16 bg-gray-200">
+    <section className="py-40 bg-gray-200">
       <div className="container mx-auto px-6">
         <h3 id="section-two-title" className="text-4xl font-bold text-center mb-12 text-gray-800">
           {t('bi.title')}
@@ -62,6 +62,33 @@ const BusinessIntelligence: React.FC = () => {
                   <li className="feature-item"><div className="feature-dot feature-dot--accent"></div><span>{t('bi.keyMonitoring')}</span></li>
                   <li className="feature-item"><div className="feature-dot feature-dot--primary"></div><span>{t('bi.keyPlanning')}</span></li>
                 </ul>
+              </div>
+              </div>
+                <div className="mt-16 max-w-7xl mx-auto">
+              <div className="line-chart relative h-64">
+                <svg width="100%" height="80%" viewBox="0 0 1000 240" className="overflow-visible">
+                    <path
+                        className="chart-line line1"
+                        d="M 0,216 L 50,212 L 100,230 L 150,210 L 200,204 L 250,216 L 300,202 L 350,196 L 400,130 L 450,194 L 500,190 L 550,184 L 600,196 L 650,180 L 700,60 L 750,100 L 800,170 L 850,164 L 900,170"
+                        stroke="var(--color-line1-light)"
+                        strokeWidth={5}
+                        fill="none"
+                    />
+                    <path
+                        className="chart-line line2"
+                        d="M 0,230 L 50,216 L 100,210 L 150,220 L 200,170 L 250,180 L 300,162 L 350,160 L 400,190 L 450,140 L 500,122 L 550,120 L 600,50 L 650,100 L 700,110 L 750,80 L 800,90 L 850,60 L 900,50"
+                        stroke="var(--color-line2-light)"
+                        strokeWidth={5}
+                        fill="none"
+                    />
+                    <path
+                        className="chart-line line3"
+                        d="M 0,200 L 50,195 L 100,190 L 150,160 L 200,150 L 250,155 L 300,140 L 350,130 L 400,100 L 450,110 L 500,115 L 550,130 L 600,120 L 650,140 L 700,150 L 750,-50 L 800,30 L 850,35 L 900,10"
+                        stroke="var(--color-line3-light)"
+                        strokeWidth={5}
+                        fill="none"
+                    />
+                </svg>
               </div>
             </div>
           </div>

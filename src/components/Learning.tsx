@@ -31,7 +31,7 @@ const posts = [
 const FeaturedPosts: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <section className="py-16 bg-gray-200">
+      <section className="py-40 bg-gray-200">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-start md:gap-12 mb-10">
           <div className="flex-1">

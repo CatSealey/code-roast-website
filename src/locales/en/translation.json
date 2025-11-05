@@ -34,15 +34,15 @@
     }
   },
   "header": {
-  "title": "Code Roast",
-  "home": "Home",
-  "services": "Services",
-  "about": "About",
-  "contact": "Contact",
-  "community": "Community",
-  "solid": "SOLID Principles",
-  "triple": "Triple Constraint",
-  "bigo": "Big O"
+    "title": "Code Roast",
+    "home": "Home",
+    "intro": "Intro",
+    "about": "About",
+    "contact": "Contact",
+    "community": "Community",
+    "solid": "SOLID Principles",
+    "triple": "Triple Constraint",
+    "bigo": "Big O"
   },
   "footer": {
     "copyright": "© 2025 Code Roast. Fueling coders, one roast at a time."
@@ -54,7 +54,7 @@
     "subtitle3": "Coffee, code, repeat.",
     "cta": "Grab a Brew & Build"
   },
-  "services": {
+  "intro": {
     "title": "SaaS Shots: Your Daily Dose of Innovation",
     "whatIsTitle": "What’s a Code Roast?",
     "whatIsDesc": "It’s the art of brewing up SaaS solutions with the same care as your morning coffee—bold, energizing, and never bland. We turn ideas into robust, scalable products that keep your business running like a fresh espresso.",

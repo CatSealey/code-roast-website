@@ -27,7 +27,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@/components/*": ["src/components/*"],
-      "@/services/*": ["src/services/*"],
+      "@/intro/*": ["src/intro/*"],
       "@/utils/*": ["src/utils/*"],
       "@/styles/*": ["src/styles/*"],
       "@/types": ["src/types"]

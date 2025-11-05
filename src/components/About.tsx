@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 const About: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <section id="about" className="py-16 bg-gray-50">
+    <section id="about" className="py-40 bg-gray-50">
       <div className="container mx-auto px-6">
         <h3 id="section-three-title" className="text-4xl font-bold text-center mb-12 text-gray-800">
           {t('about.title')}
