@@ -3,12 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Intro from './components/Intro';
-import BusinessIntelligence from './components/BusinessIntelligence';
 import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import Learning from './components/Learning';
-import Community from './pages/Community';
+import Brews from './components/Brews';
+import BrewsPage from './pages/BrewsPage';
+import RoastsPage from './pages/RoastsPage';
+import Roasts from './components/Roasts';
 
 const MainPage = () => (
   <>
@@ -16,9 +17,9 @@ const MainPage = () => (
     <main>
       <Hero />
       <Intro />
-      <Learning />
+      <Brews />
+      <Roasts />
       <About />
-      <BusinessIntelligence />
       <Contact />
     </main>
     <Footer />
@@ -30,7 +31,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/community" element={<Community />} />
+        <Route path="/brewspage" element={<BrewsPage />} />
+        <Route path="/roastspage" element={<RoastsPage />} />
       </Routes>
     </Router>
   );

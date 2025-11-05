@@ -24,9 +24,11 @@ const Header: React.FC = () => {
   const { t } = useTranslation();
   // Dropdown state
   const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
-  const [communityDropdownOpen, setCommunityDropdownOpen] = useState(false);
+  const [brewspageDropdownOpen, setBrewspageDropdownOpen] = useState(false);
+  const [roastspageDropdownOpen, setRoastspageDropdownOpen] = useState(false);
     const homeRef = React.useRef<HTMLDivElement>(null);
-    const communityRef = React.useRef<HTMLDivElement>(null);
+    const brewspageRef = React.useRef<HTMLDivElement>(null);
+    const roastspageRef = React.useRef<HTMLDivElement>(null);
 
   // Helper to get dropdown position
   const getDropdownPosition = (ref: React.RefObject<HTMLDivElement | null>) => {
@@ -83,19 +85,36 @@ const Header: React.FC = () => {
             </div>
             <div
               className="relative"
-              ref={communityRef}
-              onMouseEnter={() => setCommunityDropdownOpen(true)}
-              onMouseLeave={() => setCommunityDropdownOpen(false)}
+              ref={brewspageRef}
+              onMouseEnter={() => setBrewspageDropdownOpen(true)}
+              onMouseLeave={() => setBrewspageDropdownOpen(false)}
             >
-              <Link to="/community" className="text-white hover:text-orange-200 transition-all duration-300 hover:scale-110">{t('header.community')}</Link>
+              <Link to="/brewspage" className="text-white hover:text-orange-200 transition-all duration-300 hover:scale-110">{t('header.brewspage')}</Link>
               <DropdownMenu
-                open={communityDropdownOpen}
-                position={getDropdownPosition(communityRef)}
+                open={brewspageDropdownOpen}
+                position={getDropdownPosition(brewspageRef)}
                 width="14rem"
               >
-                <a href="/community#solid" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.solid')}</a>
-                <a href="/community#triple" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.triple')}</a>
-                <a href="/community#bigo" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.bigo')}</a>
+                <a href="/brewspage#solid" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.solid')}</a>
+                <a href="/brewspage#triple" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.triple')}</a>
+                <a href="/brewspage#bigo" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.bigo')}</a>
+              </DropdownMenu>
+            </div>
+            <div
+              className="relative"
+              ref={roastspageRef}
+              onMouseEnter={() => setRoastspageDropdownOpen(true)}
+              onMouseLeave={() => setRoastspageDropdownOpen(false)}
+            >
+              <Link to="/roastspage" className="text-white hover:text-orange-200 transition-all duration-300 hover:scale-110">{t('header.roastspage')}</Link>
+              <DropdownMenu
+                open={roastspageDropdownOpen}
+                position={getDropdownPosition(roastspageRef)}
+                width="14rem"
+              >
+                <a href="/roastspage#latest" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.solid')}</a>
+                <a href="/roastspage#triple" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.triple')}</a>
+                <a href="/roastspage#bigo" className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-orange-100 dark:hover:bg-orange-900">{t('header.bigo')}</a>
               </DropdownMenu>
             </div>
             <button

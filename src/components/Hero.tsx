@@ -45,19 +45,17 @@ const Hero: React.FC = () => {
     }
   }, [typed2, typed3, subtitle2, subtitle3]);
   return (
-    <section className="gradient-bg text-white py-20 relative overflow-hidden">
+  <section className="gradient-bg text-white py-20 flex flex-col relative justify-center items-center" style={{overflow: 'visible'}}>
       <img
         src="/logo/code-roast-white-outline.png"
         alt="Code Roast Outline"
-        className="absolute right-20 pointer-events-none select-none"
+        className="absolute pointer-events-none select-none"
         style={{
-          zIndex: 10,
+          zIndex: 1,
           width: '100%',
-          maxWidth: '3200px',
-          opacity: 0.3,
-          filter: 'blur(8px)',
-          top: '-700px',
-          left: '0%',
+          maxWidth: '1300px',
+          opacity: 0.4,
+          filter: 'blur(15px)',
           transform: 'rotate(15deg) scale(0.77)',
         }}
       />
@@ -75,9 +73,9 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-6 text-center relative z-10 flex flex-col items-center">
         <div className="flex flex-row items-center justify-center mb-16 mt-6">
           <img src="/logo/code-roast-white-icon.png" alt="Code Roast Icon" className="w-50 h-50 object-contain" style={{zIndex: 11}} />
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-left">
             <img src="/logo/code-roast-white-text.png" alt="Code Roast Logo" className="mb-2 object-fill" style={{zIndex: 11}} />
-            <h2 id="hero-title" className="text-4xl md:text-3xl font-medium fade-in neon-text text-middle">
+            <h2 id="hero-title" className="text-4xl md:text-3xl font-medium fade-in neon-text text-left ml-4">
               {t('hero.title')}
             </h2>
           </div>

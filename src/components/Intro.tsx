@@ -29,10 +29,10 @@ const Intro: React.FC = () => {
               </div>
               <div className="card-content">
                 <ul className="feature-list">
-                  <li className="feature-item"><div className="feature-dot feature-dot--primary"></div><span>{t('intro.typesDescriptive')}</span></li>
-                  <li className="feature-item"><div className="feature-dot feature-dot--accent"></div><span>{t('intro.typesDiagnostic')}</span></li>
-                  <li className="feature-item"><div className="feature-dot feature-dot--primary"></div><span>{t('intro.typesPredictive')}</span></li>
-                  <li className="feature-item"><div className="feature-dot feature-dot--accent"></div><span>{t('intro.typesPrescriptive')}</span></li>
+                  <li className="feature-item"><div className="feature-dot feature-dot--primary"></div><span>{t('intro.typesRules')}</span></li>
+                  <li className="feature-item"><div className="feature-dot feature-dot--accent"></div><span>{t('intro.typesPrinciples')}</span></li>
+                  <li className="feature-item"><div className="feature-dot feature-dot--primary"></div><span>{t('intro.typesMethods')}</span></li>
+                  <li className="feature-item"><div className="feature-dot feature-dot--accent"></div><span>{t('intro.typesFrameworks')}</span></li>
                 </ul>
               </div>
             </div>
@@ -45,10 +45,10 @@ const Intro: React.FC = () => {
               </div>
               <div className="card-content">
                 <ul className="feature-list">
-                  <li className="feature-item"><div className="feature-dot feature-dot--primary"></div><div>{t('intro.keyCollection')}</div></li>
-                  <li className="feature-item"><div className="feature-dot feature-dot--accent"></div><div>{t('intro.keyProcessing')}</div></li>
-                  <li className="feature-item"><div className="feature-dot feature-dot--primary"></div><div>{t('intro.keyStatistical')}</div></li>
-                  <li className="feature-item"><div className="feature-dot feature-dot--accent"></div><div>{t('intro.keyVisualization')}</div></li>
+                  <li className="feature-item"><div className="feature-dot feature-dot--primary"></div><div>{t('intro.keyCoding')}</div></li>
+                  <li className="feature-item"><div className="feature-dot feature-dot--accent"></div><div>{t('intro.keyData')}</div></li>
+                  <li className="feature-item"><div className="feature-dot feature-dot--primary"></div><div>{t('intro.keyBusiness')}</div></li>
+                  <li className="feature-item"><div className="feature-dot feature-dot--accent"></div><div>{t('intro.keyCulture')}</div></li>
                 </ul>
               </div>
             </div>
