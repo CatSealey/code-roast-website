@@ -1,5 +1,7 @@
 {
   "brewspage": {
+    "heroTitle": "Brews",
+    "heroSubtitle": "Add to your flavour",
     "title": "Coding Community & Continual Education",
     "description": "The coding community is a powerful force for learning, growth, and innovation. Continual education keeps us sharp and ready for new challenges.",
     "tabs": {
@@ -32,6 +34,10 @@
         ]
       }
     }
+  },
+  "roastspage": {
+    "heroTitle": "Roasts",
+    "heroSubtitle": "Where curiosity meets craft."
   },
   "header": {
     "title": "Code Roast",

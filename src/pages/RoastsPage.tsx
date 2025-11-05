@@ -36,12 +36,13 @@ const RoastsPage: React.FC = () => {
         </div>
         <div className="container mx-auto px-6 text-center relative z-10 flex flex-col items-center">
           <div className="flex flex-row items-center justify-center mb-10 mt-6">
-            <img src="/logo/code-roast-white-icon.png" alt="Code Roast Icon" className="w-50 h-50 object-contain" style={{zIndex: 11}} />
             <div className="flex flex-col items-left">
-              <img src="/logo/code-roast-white-text.png" alt="Code Roast Logo" className="mb-2 object-fill w-64 h-auto" style={{zIndex: 11}} />
-              <h2 className="text-4xl md:text-3xl font-medium fade-in neon-text text-left ml-4">
+              <div className="flex flex-col items-middle">
+              <h2 className="text-5xl md:text-6xl font-medium fade-in neon-text text-left mr-20">
                 {t('roastspage.heroTitle')}
               </h2>
+              <img src="/logo/with-code-roast.png" alt="Code Roast Logo" className="mb-2 object-fill w-64 h-auto ml-20" style={{zIndex: 11}} />
+            </div>
             </div>
           </div>
           <div className="text-xl md:text-2xl mb-8 opacity-90 fade-in text-middle">
