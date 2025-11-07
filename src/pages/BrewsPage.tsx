@@ -7,39 +7,27 @@ const tabPosts = [
   {
     key: 'solid',
     title: 'brewspage.tabs.solid.title',
-    content: [
-      'brewspage.tabs.solid.content.0',
-      'brewspage.tabs.solid.content.1',
-      'brewspage.tabs.solid.content.2',
-      'brewspage.tabs.solid.content.3',
-      'brewspage.tabs.solid.content.4',
-      'brewspage.tabs.solid.content.5',
-      'brewspage.tabs.solid.content.6'
-    ]
+    img: '/posts/SOLID-Principles/SOLID-1.png',
+    desc: 'brewspage.tabs.solid.desc'
   },
   {
     key: 'triple',
     title: 'brewspage.tabs.triple.title',
-    content: [
-      'brewspage.tabs.triple.content.0',
-      'brewspage.tabs.triple.content.1',
-      'brewspage.tabs.triple.content.2'
-    ]
+    img: '/posts/Triple-Constraint/TC-1.png',
+    desc: 'brewspage.tabs.triple.desc'
   },
   {
     key: 'bigo',
     title: 'brewspage.tabs.bigo.title',
-    content: [
-      'brewspage.tabs.bigo.content.0',
-      'brewspage.tabs.bigo.content.1',
-      'brewspage.tabs.bigo.content.2'
-    ]
+    img: '/posts/Big-O/Big-O-1.png',
+    desc: 'brewspage.tabs.bigo.desc'
   }
 ];
 
 const Brews: React.FC = () => {
   const { t } = useTranslation();
   const [active, setActive] = useState(0);
+  const [gridView, setGridView] = useState(true);
   const activePost = tabPosts[active];
 
   return (
@@ -86,30 +74,51 @@ const Brews: React.FC = () => {
         </div>
       </section>
       <main className="container mx-auto px-6 py-12">
-        <h1 className="text-4xl font-bold mb-6">{t('brewspage.title')}</h1>
-        <p className="mb-8 text-lg opacity-80">{t('brewspage.description')}</p>
         <section className="mb-12">
-          <div className="flex gap-4 mb-4">
-            {tabPosts.map((post, idx) => (
-              <button
-                key={post.key}
-                className={`btn btn-secondary morphing-button${active === idx ? ' morphing-button--active' : ''}`}
-                onClick={() => setActive(idx)}
-                >
-                {t(post.title)}
-              </button>
-            ))}
-          </div>
-          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
-            {activePost?.content.map((line, idx) => (
-              <p key={idx} className="mb-2 text-base opacity-90">{t(line)}</p>
-            ))}
-          </div>
+          <h1 className="text-4xl font-bold mb-6">Coding Community & Continual Education</h1>
+          <p className="mb-8 text-lg opacity-80">Welcome to the Code Roast community! Here, we believe learning is a lifelong journey. Connect, share, and grow with fellow coders as you explore new ideas and sharpen your skills. Grab a brew and join the conversation!</p>
         </section>
       </main>
+      {/* Brews Grid/List Section */}
+      <section className="my-16">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-3xl font-bold">{t('brewspage.allBrewsTitle', 'All Brews')}</h2>
+          <button
+            className="btn btn-primary"
+            onClick={() => setGridView((prev) => !prev)}
+          >
+            {gridView ? t('brewspage.listView', 'List View') : t('brewspage.gridView', 'Grid View')}
+          </button>
+        </div>
+        <div className={gridView ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8' : 'flex flex-col gap-6'}>
+          {tabPosts.map((brew) => (
+            gridView ? (
+              <div key={brew.key} className="card card-hover bg-white rounded-lg shadow-md p-0 flex flex-col items-center">
+                <img src={brew.img} alt={t(brew.title)} className="w-68 h-68 object-cover rounded-lg mt-6" />
+                <div className="p-6 w-full flex flex-col items-center">
+                  <h3 className="text-xl font-semibold mb-2 text-center">{t(brew.title)}</h3>
+                  <p className="text-base opacity-90 mb-4 text-center">{t(`brewspage.tabs.${brew.key}.desc`, 'One line summary')}</p>
+                  <a href={`#${brew.key}`} className="text-orange-600 font-semibold hover:underline">{t('brewspage.viewDetails', 'View Details')}</a>
+                </div>
+              </div>
+            ) : (
+              <div key={brew.key} className="card card-hover bg-white rounded-lg shadow-md p-4 flex flex-row items-center">
+                <img src={brew.img} alt={t(brew.title)} className="w-24 h-24 object-cover rounded-lg mr-6 flex-shrink-0" />
+                <div className="flex flex-col justify-center">
+                  <h3 className="text-xl font-semibold mb-2">{t(brew.title)}</h3>
+                  <p className="text-base opacity-90 mb-2">{t(`brewspage.tabs.${brew.key}.desc`, 'One line summary')}</p>
+                  <a href={`#${brew.key}`} className="text-orange-600 font-semibold hover:underline">{t('brewspage.viewDetails', 'View Details')}</a>
+                </div>
+              </div>
+            )
+          ))}
+        </div>
+      </section>
       <Footer />
     </>
   );
 };
+
+// Add gridView state
 
 export default Brews;

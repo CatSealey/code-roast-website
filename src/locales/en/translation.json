@@ -7,31 +7,15 @@
     "tabs": {
       "solid": {
         "title": "SOLID Principles",
-        "content": [
-          "SOLID is a set of design principles that help developers write maintainable and scalable code.",
-          "S: Single Responsibility Principle",
-          "O: Open/Closed Principle",
-          "L: Liskov Substitution Principle",
-          "I: Interface Segregation Principle",
-          "D: Dependency Inversion Principle",
-          "Each principle helps you build better software."
-        ]
+        "desc": "Design principles for maintainable code."
       },
       "triple": {
         "title": "Triple Constraint",
-        "content": [
-          "The Triple Constraint is a project management concept: Scope, Time, Cost.",
-          "Balancing these three factors is key to successful project delivery.",
-          "Changing one affects the others."
-        ]
+        "desc": "Project management: Scope, Time, Cost."
       },
       "bigo": {
         "title": "Big O",
-        "content": [
-          "Big O notation describes the performance of algorithms.",
-          "It helps you analyze time and space complexity.",
-          "Understanding Big O is essential for writing efficient code."
-        ]
+        "desc": "Algorithm efficiency and complexity."
       }
     }
   },

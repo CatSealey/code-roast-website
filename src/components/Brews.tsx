@@ -8,15 +8,15 @@ const posts = [
     desc: 'brews.posts.solid.desc',
     img: '/posts/SOLID-Principles/SOLID-1.png',
     color: 'orange',
-    link: '/community#solid',
+    link: '/brews#solid',
   },
   {
     key: 'triple',
     title: 'brews.posts.triple.title',
     desc: 'brews.posts.triple.desc',
-    img: '/posts/Triple Constraint/TC-1.png',
+    img: '/posts/Triple-Constraint/TC-1.png',
     color: 'teal',
-    link: '/community#triple',
+    link: '/brews#triple',
   },
   {
     key: 'bigo',
@@ -24,7 +24,7 @@ const posts = [
     desc: 'brews.posts.bigo.desc',
     img: '/posts/Big-O/Big-O-1.png',
     color: 'blue',
-    link: '/community#bigo',
+    link: '/brews#bigo',
   },
 ];
 
