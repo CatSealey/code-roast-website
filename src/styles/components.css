@@ -1,3 +1,9 @@
+@media (max-width: 600px) {
+  .hero-bean {
+    bottom: -6rem;
+  }
+}
+
 /* Typewriter cursor animation */
 .typewriter-cursor {
   display: inline-block;

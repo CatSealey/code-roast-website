@@ -1,104 +1,97 @@
 {
-  "brewspage": {
-    "heroTitle": "Brews",
-    "heroSubtitle": "Add to your flavour",
-    "title": "Coding Community & Continual Education",
-    "description": "The coding community is a powerful force for learning, growth, and innovation. Continual education keeps us sharp and ready for new challenges.",
-    "tabs": {
-      "solid": {
-        "title": "SOLID Principles",
-        "desc": "Design principles for maintainable code."
-      },
-      "triple": {
-        "title": "Triple Constraint",
-        "desc": "Project management: Scope, Time, Cost."
-      },
-      "bigo": {
-        "title": "Big O",
-        "desc": "Algorithm efficiency and complexity."
-      }
-    }
-  },
-  "roastspage": {
-    "heroTitle": "Roasts",
-    "heroSubtitle": "Where curiosity meets craft."
-  },
   "header": {
-    "title": "Code Roast",
+    "title": "Code-Roast",
     "home": "Home",
     "intro": "Intro",
     "about": "About",
-    "contact": "Contact",
-    "brewspage": "Brews",
-    "roastspage": "Roasts",
-    "solid": "SOLID Principles",
-    "triple": "Triple Constraint",
-    "bigo": "Big O"
+    "contact": "Contact"
   },
   "footer": {
-    "copyright": "© 2025 Code Roast. Fueling coders, one roast at a time."
+    "copyright": "© 2025 Code-Roast. Fueling coders, one roast at a time."
   },
   "hero": {
-    "title": "Fueled by Passion & Coffee",
+    "title": "Fueling coders, one roast at a time.",
     "subtitle1": "We blend creativity and innovation with clean, robust development.",
     "subtitle2": "Great code needs both skill and soul.",
     "subtitle3": "Coffee, code, repeat.",
     "cta": "Grab a Brew & Build"
   },
   "intro": {
-    "title": "Intro to Code Roast",
-    "whatIsTitle": "Why We Brew Knowledge",
-    "whatIsDesc": "At Code Roast, we believe mastery comes from small, strong doses of insight — ideas that wake you up, not wear you out. Every concept, rule, and model we share is distilled to spark thought, fuel discussion, and strengthen your craft.",
+    "title": "Intro to Code-Roast",
+    "eyebrow": "Curiosity, served fresh",
+    "summary": "Big ideas are better when we explore them together.",
+    "brewDescription": "Code-Roast is a place to ask why, share what we learn, and put ideas into practice. Our Brews distil topics in code, data, and business into visual lessons you can explore at your own pace.",
+    "topicsLabel": "Topics we explore",
+    "topicCode": "Code",
+    "topicData": "Data",
+    "topicBusiness": "Business",
+    "topicCommunity": "Community",
+    "whatIsTitle": "A Place to Start",
+    "whatIsDesc": "Code-Roast is for curious minds who like to ask why, share ideas, and learn by making.",
     "typesTitle": "What We Explore",
-    "typesRules": "Rules: The boundaries that guide great systems.",
-    "typesPrinciples": "Principles: The timeless truths behind solid design.",
-    "typesMethods": "Methods: The repeatable ways to turn ideas into outcomes.",
-    "typesFrameworks": "Frameworks: The structures that keep teams aligned and code resilient.",
-    "keyTitle": "Our Blend of Disciplines",
-    "keyCoding": "Code: The craft of building logic that lasts.",
-    "keyData": "Data: The foundation of every good decision.",
-    "keyBusiness": "Business: Where principles meet practice, and value is brewed.",
-    "keyCulture": "Community: A shared table for thinkers, makers, and mentors."
+    "typesRules": "Ideas that make complex things clearer.",
+    "typesPrinciples": "Principles that guide thoughtful work.",
+    "typesMethods": "Methods worth putting into practice.",
+    "typesFrameworks": "Fresh perspectives on familiar problems.",
+    "keyTitle": "What Brings Us Together",
+    "keyCoding": "Code: Build with intention.",
+    "keyData": "Data: Find meaning in the details.",
+    "keyBusiness": "Business: Connect ideas to impact.",
+    "keyCulture": "Community: Learn better together."
   },
   "roasts": {
     "title": "Roasts: Where Curiosity Meets Craft",
-    "understandingTitle": "How We Learn",
-    "understandingDesc": "Real learning is iterative — test, taste, refine. Code Roast embraces this process with short, deep explorations called Brews, each designed to sharpen your thinking and expand your mental models.",
-    "coreTitle": "Our Approach",
-    "coreConcepts": "Concepts: Start with a spark — the big idea behind the method.",
-    "coreContext": "Context: See where it fits, from clean code to agile strategy.",
-    "coreConnection": "Connection: Link principles across disciplines to build stronger intuition.",
-    "coreCreation": "Creation: Apply what you learn — build, break, and iterate.",
-    "vsTitle": "How We’re Different",
-    "vsTraditional": "Traditional Learning: Long, linear, and often disconnected.",
-    "vsBI": "Code Roast: Compact, contextual, and community-driven.",
-    "keyTitle": "What You’ll Find Here",
-    "keyBrews": "Brews: Bite-sized lessons with real-world grounding.",
-    "keyDeepDives": "Deep Dives: Extended explorations with visuals, videos, and code.",
-    "keyCommunity": "Community: Share your takeaways, challenge ideas, and grow together."
+    "understandingTitle": "Think Deeply",
+    "understandingDesc": "The best ideas aren't always the loudest. We slow down, look closer, and make room for thoughtful work.",
+    "coreTitle": "Make Simply",
+    "coreConcepts": "Start with a good question.",
+    "coreContext": "Look at the bigger picture.",
+    "coreConnection": "Connect ideas across disciplines.",
+    "coreCreation": "Try, learn, and refine.",
+    "vsTitle": "Our Perspective",
+    "vsTraditional": "Less noise, more substance.",
+    "vsBI": "Less jargon, more curiosity.",
+    "keyTitle": "The Good Stuff",
+    "keyBrews": "Small ideas with room to grow.",
+    "keyDeepDives": "Thoughtful explorations of bigger questions.",
+    "keyCommunity": "Conversations that move us forward."
   },
   "about": {
     "title": "Our Story & Purpose",
-    "missionTitle": "Why We Exist",
-    "missionDesc": "Code Roast started as a small side project between coders who believed that great learning should be strong, accessible, and shareable — like a good cup of coffee. Now, it’s a growing community that celebrates curiosity, critical thinking, and craft.",
-    "valuesTitle": "Our Core Values",
-    "valuesCuriosity": "Curiosity: Every bug, business rule, and theory is a chance to learn.",
-    "valuesCraft": "Craft: We care about how things are built — from systems to sentences.",
-    "valuesClarity": "Clarity: Simplicity isn’t easy — it’s the ultimate design goal.",
-    "valuesCommunity": "Community: We grow faster when we share ideas and caffeine.",
-    "howWeWorkTitle": "How We Brew Together",
-    "howWeWorkCollaborate": "Collaborate: Discuss, debate, and refine your understanding.",
-    "howWeWorkContribute": "Contribute: Write Brews, share frameworks, or host sessions.",
-    "howWeWorkCreate": "Create: Turn insights into projects, papers, and real progress.",
-    "invitationTitle": "Join the Roast",
-    "invitationDesc": "Whether you’re a developer, data analyst, or product thinker — Code Roast is a space to learn, share, and caffeinate your curiosity. Grab a Brew and join the conversation."
+    "missionTitle": "Why We're Here",
+    "missionDesc": "Code-Roast began with a simple belief: good things happen when people share what they're learning.",
+    "valuesTitle": "What Matters",
+    "valuesCuriosity": "Curiosity: Keep asking questions.",
+    "valuesCraft": "Craft: Care about the details.",
+    "valuesClarity": "Clarity: Make ideas accessible.",
+    "valuesCommunity": "Community: Make space for each other.",
+    "howWeWorkTitle": "How We Grow",
+    "howWeWorkCollaborate": "Share what we know.",
+    "howWeWorkContribute": "Listen to different perspectives.",
+    "howWeWorkCreate": "Make something meaningful.",
+    "invitationTitle": "Pull Up a Chair",
+    "invitationDesc": "Whatever you're learning, there's a place for your curiosity here."
   },
   "contact": {
     "title": "Get Caffeinated: Connect With Us",
-    "description": "Ready to fuel your next project? Whether you need a SaaS MVP, a code review, or just want to talk shop over coffee, Code Roast is here for you.",
-    "cta": "Let’s Brew Something Great"
+    "description": "Ready to fuel your next project?\nWhether you need a SaaS MVP, a code review, or just want to talk shop over coffee,\nCode-Roast is here for you.",
+    "cta": "Let’s Brew Something Great",
+    "emailSubject": "Let's brew something great",
+    "emailBody": "Hi Code-Roast,\r\n\r\nI'd love to chat about:\r\n\r\n[Tell us a little about your project or idea]\r\n\r\nThanks,"
   },
   "brews": {
+    "galleryLabel": "The brew collection",
+    "galleryTitle": "It's a brew",
+    "cardLabel": "A Code-Roast brew",
+    "selectTopic": "Choose a brew",
+    "selectSlide": "Choose a {{title}} slide",
+    "goToSlide": "Show {{title}} slide {{current}}",
+    "carouselRole": "carousel",
+    "carouselLabel": "{{title}} slides",
+    "slideAlt": "{{title}}, slide {{current}} of {{total}}",
+    "previousSlide": "Previous {{title}} slide",
+    "nextSlide": "Next {{title}} slide",
+    "slideCount": "{{current}} / {{total}}",
     "title": "Brews: What is a Brew?",
     "subTitle": "A Brew is a compact learning experience designed to grow your skills, refresh your knowledge, and spark exploration of deeper concepts you can use every day.",
     "explanation": "We don’t all have time for lengthy courses, so our Brews are crafted to spark your curiosity — covering the topics that matter most, from development and data science to business and project management.",

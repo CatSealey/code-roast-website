@@ -45,11 +45,11 @@ const Hero: React.FC = () => {
     }
   }, [typed2, typed3, subtitle2, subtitle3]);
   return (
-  <section className="gradient-bg text-white py-20 flex flex-col relative justify-center items-center" style={{overflow: 'visible'}}>
+  <section className="gradient-bg text-white py-20 flex flex-col relative justify-center items-center" style={{overflowX: 'clip', overflowY: 'visible'}}>
       <img
         src="/logo/code-roast-white-outline.png"
-        alt="Code Roast Outline"
-        className="absolute pointer-events-none select-none"
+        alt="Code-Roast Outline"
+        className="hero-bean absolute pointer-events-none select-none"
         style={{
           zIndex: 1,
           width: '100%',

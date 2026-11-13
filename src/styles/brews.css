@@ -1,0 +1,326 @@
+.intro-brews-intro,
+.intro-brews-gallery {
+  padding-block: clamp(5rem, 9vw, 9rem);
+}
+
+.intro-brews-heading {
+  max-width: 860px;
+}
+
+.intro-brews-eyebrow {
+  margin-bottom: 1.25rem;
+  color: #a84512;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.intro-brews-heading h2,
+.intro-brews-gallery-heading h2 {
+  color: #263c3a;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -.045em;
+  line-height: 1.1;
+}
+
+.intro-brews-lead {
+  margin-top: 1.5rem;
+  color: #263c3a;
+  font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.intro-brews-copy,
+.intro-brews-gallery-heading > p {
+  max-width: 670px;
+  color: #4a5e5b;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.intro-brews-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 2rem;
+}
+
+.intro-brews-topics span {
+  padding: .5rem 1rem;
+  border: 1px solid #aebdb6;
+  border-radius: 999px;
+  color: #285851;
+  font-size: .85rem;
+  font-weight: 600;
+}
+
+.intro-brews-gallery-heading {
+  margin-bottom: 2rem;
+}
+
+.intro-brews-gallery-heading h2 {
+  max-width: 650px;
+  margin-bottom: 0;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+}
+
+.intro-brews-gallery-heading > p {
+  max-width: 300px;
+  margin-bottom: 0;
+  font-size: 1rem;
+}
+
+.brew-selector {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .75rem;
+  margin-bottom: 2rem;
+}
+
+.brew-selector-button {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid #aebdb6;
+  border-radius: .5rem;
+  background: transparent;
+  color: #285851;
+  cursor: pointer;
+  font-weight: 700;
+  text-align: left;
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+
+.brew-selector-button[aria-pressed="true"] {
+  border-color: #145f55;
+  background: #145f55;
+  color: #fff;
+}
+
+.brew-selector-button:hover:not([aria-pressed="true"]) {
+  border-color: #a84512;
+}
+
+.brew-selector-number {
+  color: #a84512;
+  font-size: .72rem;
+  letter-spacing: .1em;
+}
+
+.brew-selector-button[aria-pressed="true"] .brew-selector-number {
+  color: #ffc294;
+}
+
+.brew-carousel {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+.brew-carousel-copy {
+  min-width: 0;
+}
+
+.brew-carousel-label {
+  display: block;
+  margin-bottom: 1.25rem;
+  color: #a84512;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.brew-carousel-title {
+  margin: 0 0 1rem;
+  color: #1d3833;
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  letter-spacing: -.04em;
+  line-height: 1.1;
+}
+
+.brew-carousel-description {
+  max-width: 30rem;
+  margin-bottom: 2rem;
+  color: #52655d;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.brew-carousel-slide {
+  min-width: 0;
+  overflow: hidden;
+  border-radius: .75rem;
+  background: #071411;
+  aspect-ratio: 1;
+  box-shadow: 0 24px 50px rgba(13, 63, 54, .18);
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.brew-carousel-slide:active {
+  cursor: grabbing;
+}
+
+.brew-carousel-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform .85s cubic-bezier(.22, 1, .36, 1);
+}
+
+.brew-carousel-track.is-instant {
+  transition: none;
+}
+
+.brew-carousel-slide img {
+  display: block;
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+}
+
+.brew-carousel-controls {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.brew-carousel-controls button {
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid #bbcbc3;
+  border-radius: 50%;
+  color: #244e46;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.brew-carousel-controls button:hover {
+  border-color: #a84512;
+  color: #a84512;
+}
+
+.brew-selector-button:focus-visible,
+.brew-carousel-controls button:focus-visible,
+.brew-carousel-progress button:focus-visible {
+  outline: 3px solid #d05d09;
+  outline-offset: 3px;
+}
+
+.brew-carousel-count {
+  min-width: 2.5rem;
+  color: #52655d;
+  font-size: .8rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.brew-carousel-progress {
+  display: flex;
+  gap: .3rem;
+  max-width: 16rem;
+  margin-top: 1.5rem;
+}
+
+.brew-carousel-progress button {
+  height: 1.5rem;
+  flex: 1;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.brew-carousel-progress button::after {
+  display: block;
+  height: 4px;
+  border-radius: 999px;
+  background: #b6c8bd;
+  content: '';
+}
+
+.brew-carousel-progress .is-active::after {
+  background: #bd5319;
+}
+
+.dark-mode .intro-brews-eyebrow,
+.dark-mode .brew-carousel-label,
+.dark-mode .brew-selector-number {
+  color: #ffb078;
+}
+
+.dark-mode .intro-brews-heading h2,
+.dark-mode .intro-brews-gallery-heading h2,
+.dark-mode .intro-brews-lead {
+  color: #f0f7f2;
+}
+
+.dark-mode .intro-brews-copy,
+.dark-mode .intro-brews-gallery-heading > p {
+  color: #c9dcd3;
+}
+
+.dark-mode .intro-brews-topics span {
+  border-color: #578279;
+  color: #e0eee6;
+}
+
+.dark-mode .brew-selector-button {
+  border-color: #578279;
+  color: #e0eee6;
+}
+
+.dark-mode .brew-selector-button[aria-pressed="true"] {
+  border-color: #ffb078;
+  background: #ffb078;
+  color: #173a33;
+}
+
+.dark-mode .brew-selector-button[aria-pressed="true"] .brew-selector-number {
+  color: #603015;
+}
+
+.dark-mode .brew-carousel-description,
+.dark-mode .brew-carousel-count {
+  color: #d7e9df;
+}
+
+.dark-mode .brew-carousel-controls button {
+  border-color: #8db4a7;
+  color: #f0f7f2;
+}
+
+.dark-mode .brew-carousel-progress button::after {
+  background: #487a6d;
+}
+
+.dark-mode .brew-carousel-progress .is-active::after {
+  background: #ffb078;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brew-carousel-track {
+    transition: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .brew-selector-button {
+    padding: .8rem 1rem;
+  }
+
+  .brew-carousel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+}

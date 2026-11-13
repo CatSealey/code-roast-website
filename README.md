@@ -5,7 +5,7 @@ A modern, responsive website for Code-Roast with a focus on data analysis and bu
 ## 🚀 Features
 
 - **Responsive Design**: Mobile-first approach with modern CSS Grid and Flexbox
-- **Dark Mode**: Smooth theme switching with localStorage persistence
+- **Dark Mode**: Enabled by default with a manual theme toggle
 - **Component Architecture**: Modular OOP design following SOLID principles
 - **Real-time Configuration**: Dynamic content and styling updates
 - **Interactive Animations**: Smooth hover effects, scroll reveals, and particle systems
